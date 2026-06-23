@@ -113,7 +113,7 @@ footer{max-width:1500px;margin:24px auto 0;color:var(--muted)}
       <div>
         <p class="eyebrow">Judge workspace / Day 1 rubric</p>
         <h1>ECP Bootcamp 3.0 Judge Report</h1>
-        <p class="hero-lede">A visual, evidence-backed review surface for scoring, hard questioning, security critique, and published-work findings across all 11 teams.</p>
+        <p class="hero-lede">Evidence-backed scoring guidance, security critique, and published-work findings across all 11 teams.</p>
       </div>
       <div>
         <div class="hero-meta">
@@ -137,11 +137,11 @@ footer{max-width:1500px;margin:24px auto 0;color:var(--muted)}
     <div class="poster-card">
       <div class="poster-mark" aria-hidden="true"></div>
       <div>
-        <h2>Short judge cards first. Full evidence on demand.</h2>
-        <p>The default view now prioritizes verdict, score logic, risk, and tricky questions instead of slide-by-slide reading.</p>
+        <h2>Judge Focus</h2>
+        <p>Day 1 rubric calibration, execution risk, security posture, value evidence, and targeted Q&A.</p>
       </div>
     </div>
-    <div class="stat-tile"><div class="num">11</div><div class="label">Teams reviewed</div><div class="caption">Dropdown plus all-team score matrix.</div></div>
+    <div class="stat-tile"><div class="num">11</div><div class="label">Teams reviewed</div><div class="caption">All submitted presentation folders included.</div></div>
     <div class="stat-tile"><div class="num">5</div><div class="label">Rubric areas</div><div class="caption">Problem, priority, governance, value, POC.</div></div>
     <div class="stat-tile"><div class="num">4</div><div class="label">Published checks</div><div class="caption">Nexa, Hoppers, Suchaiirmon, Girls Power.</div></div>
   </section>
@@ -190,7 +190,6 @@ footer{max-width:1500px;margin:24px auto 0;color:var(--muted)}
   </section>
   <section class="panel">
     <h2>Suggested Score Ranking</h2>
-    <p class="note" style="margin-bottom:12px">Vertical scorecards are easier to scan while judging: rank, score, rubric split, judge read, score rationale, best question, and value claim stay together per team.</p>
     <div id="comparisonTable" class="ranking-list" role="list"></div>
   </section>
   <div class="controls">
@@ -198,7 +197,7 @@ footer{max-width:1500px;margin:24px auto 0;color:var(--muted)}
       <label for="teamSelect">Select team</label>
       <select id="teamSelect"></select>
     </div>
-    <div class="note">Default view is the short judge briefing. Open the detail sections only when you need backup evidence.</div>
+    <div class="note">Scores use the Day 1 rubric weights and published-work evidence where available.</div>
   </div>
   <section class="panel" id="teamPanel"></section>
   <footer>Source scope: slides for all teams; public repos/live artifacts reviewed only where teams published them or the judge supplied the link. Industry-control baseline references: <a href="https://learn.microsoft.com/en-us/azure/search/search-document-level-access-overview">Microsoft Azure AI Search document-level access</a>, <a href="https://qdrant.tech/documentation/concepts/filtering/">Qdrant payload filtering</a>, <a href="https://docs.pinecone.io/guides/search/filter-by-metadata">Pinecone metadata filtering</a>, and <a href="https://atlas.mitre.org/">MITRE ATLAS</a>. Student/member names were intentionally omitted.</footer>
@@ -956,8 +955,8 @@ function renderTeam(id) {
       ${section('Budget / ROI Check', (team.budget || []).slice(0, 3))}
     </div>
     ${publishedBlock(team)}
-    ${detailsSection('Open detailed technical notes', `<div class="grid-2">${section('Judge Interpretation / What This Really Means', team.judge || team.weaknesses, 'priority')}${section('Industry Benchmark / Expected Controls', team.benchmark || team.security, 'priority')}</div><div class="grid-2" style="margin-top:12px">${section("Doesn't Make Sense / Challenge Hard", team.challengePoints || team.weaknesses, 'warn')}${section('Security And AI Governance Critique', team.security, warnSecurity ? 'warn' : '')}</div><div style="margin-top:12px">${atlasBlock(team.atlasLens)}</div><div style="margin-top:12px">${scenarioBlock(team.scenarioQuestions)}</div>`)}
-    ${detailsSection('Open slide evidence backup', `<div class="grid-2">${section('Good Things / Strengths', team.strengths)}${section('Bad Things / Weaknesses', team.weaknesses)}</div><div style="margin-top:12px">${rubricBlock(team)}</div><div class="grid-2" style="margin-top:12px">${section('Strong Evidence And Supporting Facts', team.strongEvidence || team.evidence)}${section('Evidence Notes', team.evidence)}</div>`)}
+    ${detailsSection('Detailed Technical Notes', `<div class="grid-2">${section('Judge Interpretation / What This Really Means', team.judge || team.weaknesses, 'priority')}${section('Industry Benchmark / Expected Controls', team.benchmark || team.security, 'priority')}</div><div class="grid-2" style="margin-top:12px">${section("Doesn't Make Sense / Challenge Hard", team.challengePoints || team.weaknesses, 'warn')}${section('Security And AI Governance Critique', team.security, warnSecurity ? 'warn' : '')}</div><div style="margin-top:12px">${atlasBlock(team.atlasLens)}</div><div style="margin-top:12px">${scenarioBlock(team.scenarioQuestions)}</div>`)}
+    ${detailsSection('Slide Evidence Backup', `<div class="grid-2">${section('Good Things / Strengths', team.strengths)}${section('Bad Things / Weaknesses', team.weaknesses)}</div><div style="margin-top:12px">${rubricBlock(team)}</div><div class="grid-2" style="margin-top:12px">${section('Strong Evidence And Supporting Facts', team.strongEvidence || team.evidence)}${section('Evidence Notes', team.evidence)}</div>`)}
   `;
 }
 function renderComparison() {
