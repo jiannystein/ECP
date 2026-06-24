@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECP Bootcamp 3.0 Judge Report</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2311130f'/%3E%3Ccircle cx='22' cy='22' r='10' fill='%231557ff'/%3E%3Ccircle cx='42' cy='22' r='10' fill='%23f7b718'/%3E%3Ccircle cx='32' cy='43' r='10' fill='%2320a978'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--ink:#18202f;--muted:#687086;--line:#dce2ee;--blue:#1c5d99;--blue2:#0f3f6c;--teal:#0f766e;--amber:#b7791f;--red:#b42318;--green:#27753d;--chip:#eef4fb}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Aptos,Segoe UI,Arial,sans-serif;line-height:1.45}header{background:linear-gradient(120deg,#10243d,#164c73 58%,#0f766e);color:#fff;padding:28px 34px}header h1{margin:0 0 8px;font-size:30px;letter-spacing:0}header p{margin:4px 0;color:#dbeafe;max-width:1120px}main{max-width:1500px;margin:0 auto;padding:24px 28px 48px}.controls{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:18px;align-items:end;margin-bottom:18px}label{display:block;font-weight:700;margin-bottom:6px}select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink);font-size:15px}.card,section.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 2px rgba(16,24,40,.04)}.panel{padding:18px;margin:18px 0}h2{font-size:22px;margin:0 0 12px}h3{font-size:17px;margin:0 0 8px}h4{margin:0 0 7px;font-size:15px;color:var(--blue2)}.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.metric{padding:13px;border:1px solid var(--line);border-radius:8px;background:#fbfdff}.metric .k{font-size:12px;color:var(--muted);text-transform:uppercase;font-weight:800;letter-spacing:.04em}.metric .v{margin-top:5px;font-weight:700}.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.chip{background:var(--chip);color:#123a5a;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:700}.chip.amber{background:#fff7e6;color:#8a5600}ul{margin:0;padding-left:20px}li{margin:6px 0}.team-title{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.team-title h2{margin-bottom:4px}.team-title .sub{color:var(--muted);font-size:14px}.finding{border-left:4px solid var(--blue);padding-left:12px}.rubric-grid{display:grid;grid-template-columns:repeat(5,minmax(180px,1fr));gap:10px}.rubric-item{padding:12px;background:#f8fbff;border:1px solid var(--line);border-radius:8px}.rubric-item strong{display:block;color:var(--blue2);margin-bottom:4px}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:white}table{width:100%;border-collapse:collapse;min-width:1120px}th,td{border-bottom:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top;font-size:13px}th{background:#eef4fb;color:#163b5a;font-size:12px;text-transform:uppercase;letter-spacing:.04em}tr:hover td{background:#fbfdff}.section-stack{display:grid;gap:12px}.section-card{padding:14px;border:1px solid var(--line);border-radius:8px;background:#fff}.warn{background:#fff7f5;border-color:#ffd6d1}.note{color:var(--muted);font-size:13px}.small{font-size:12px}.lenses{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lens{padding:10px 12px;background:#fbfdff;border:1px solid var(--line);border-radius:8px}.lens b{color:var(--teal)}details{margin-top:12px;border:1px solid var(--line);border-radius:8px;background:#fff}summary{cursor:pointer;padding:12px 14px;font-weight:800;color:var(--blue2)}details .section-card{border:0;border-top:1px solid var(--line);border-radius:0}.priority{background:#f4fbf9;border-color:#bfe5dd}.priority h3{color:#0f5f59}footer{color:var(--muted);font-size:12px;margin-top:24px}@media(max-width:980px){.controls,.grid-3,.grid-2,.lenses{grid-template-columns:1fr}.rubric-grid{grid-template-columns:1fr}main{padding:16px}header{padding:22px 18px}.team-title{display:block}}
+</style>
+<style>
+.preface-dense{display:none}
+.quick-summary .lens{font-size:14px}
+.verdict{font-size:18px;font-weight:800;color:var(--blue2);margin:10px 0 0}
+.compact-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;margin-top:12px}
+.compact-row .section-card li{margin:5px 0}
+.compact-row .section-card h3{font-size:16px}
+.score-badge{font-size:26px;font-weight:900;color:#0f3f6c;background:#eef6ff;border:1px solid #b8d7f4;border-radius:8px;padding:10px 14px;min-width:120px;text-align:center}
+.score-badge span{display:block;font-size:11px;color:#687086;text-transform:uppercase;letter-spacing:.06em}
+.score-card{background:#f8fbff;border-color:#bfd7f0}
+.score-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:8px 0}
+.score-mini{border:1px solid var(--line);border-radius:6px;padding:8px;background:#fff}
+.score-mini b{display:block;color:var(--blue2);font-size:12px}
+.score-mini span{font-size:18px;font-weight:900}
+@media(max-width:980px){.compact-row{grid-template-columns:1fr}}
+</style>
+<style>
+:root{--cream:#f8f3ea;--paper:#fffdf8;--paper-2:#fbf6ed;--paper-3:#eee4d7;--ink:#17130f;--muted:#746b60;--line:#dfd2c1;--black:#111;--blue:#1557ff;--red:#ef3f2f;--yellow:#f7b718;--green:#20a978;--mint:#dff3df;--peach:#ffe1cf;--lav:#ece7ff;--shadow:0 14px 34px rgba(30,20,10,.09)}
+body{background:var(--cream);color:var(--ink);font-family:Inter,Aptos,"Segoe UI",Arial,sans-serif;line-height:1.48;background-image:radial-gradient(circle at 15% 12%,rgba(21,87,255,.08),transparent 28%),radial-gradient(circle at 90% 0,rgba(239,63,47,.08),transparent 24%),linear-gradient(180deg,#fffaf2 0,#f8f3ea 280px,#f7f1e8 100%)}
+.site-hero{max-width:1500px;margin:18px auto 0;padding:0 28px;background:transparent;color:var(--ink)}
+.hero-shell{display:grid;grid-template-columns:minmax(320px,.82fr) minmax(360px,1.18fr);gap:22px;align-items:stretch;border:2px solid var(--black);border-radius:8px;background:var(--paper);box-shadow:9px 9px 0 var(--black);overflow:hidden}
+.hero-copy{padding:30px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;background:linear-gradient(180deg,#fffdf8,#fbf1e1)}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--red);margin:0 0 10px}
+.site-hero h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(38px,5vw,74px);line-height:.94;margin:0;letter-spacing:0;color:var(--ink);max-width:680px}
+.hero-lede{font-size:17px;color:#3a332b;max-width:650px;margin:16px 0 0}
+.hero-meta,.pill-nav{display:flex;flex-wrap:wrap;gap:8px}
+.hero-meta span,.pill-nav a{border:1.5px solid var(--black);border-radius:999px;padding:7px 11px;background:#fff;font-size:12px;font-weight:900;color:var(--ink);text-decoration:none;box-shadow:2px 2px 0 rgba(17,17,17,.2)}
+.pill-nav a:nth-child(2){background:var(--mint)}.pill-nav a:nth-child(3){background:#fff1b8}.pill-nav a:nth-child(4){background:#ffe0da}
+.hero-art{position:relative;min-height:430px;background:#101010;border-left:2px solid var(--black)}
+.hero-art img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-art:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 28%,rgba(255,255,255,.05));pointer-events:none}
+main{max-width:1500px;padding:26px 28px 52px}
+.visual-dashboard{display:grid;grid-template-columns:1.2fr repeat(3,minmax(0,1fr));gap:14px;margin:22px 0}
+.poster-card,.stat-tile{border:2px solid var(--black);border-radius:8px;background:var(--paper);box-shadow:5px 5px 0 var(--black);padding:18px;min-height:132px}
+.poster-card{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:#111;color:#fff}
+.poster-mark{width:70px;height:70px;border:2px solid #fff;border-radius:8px;background:conic-gradient(from 45deg,var(--blue),var(--yellow),var(--red),var(--green),var(--blue));box-shadow:4px 4px 0 #fff}
+.poster-card h2,.poster-card p{margin:0}.poster-card h2{font-size:23px;color:#fff}.poster-card p{color:#e9e1d7;margin-top:5px}
+.stat-tile{position:relative;overflow:hidden}
+.stat-tile:nth-child(2){background:#eef4ff}.stat-tile:nth-child(3){background:#fff0ba}.stat-tile:nth-child(4){background:#e9f8ee}
+.stat-tile .num{font-family:Georgia,"Times New Roman",serif;font-size:42px;font-weight:900;line-height:1;color:var(--black)}
+.stat-tile .label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:#3f372f;margin-top:10px}
+.stat-tile .caption{font-size:13px;color:#5d544b;margin-top:7px}
+.panel{background:rgba(255,253,248,.93);border:1.5px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+section.panel{padding:20px;margin:18px 0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:27px;letter-spacing:0;color:var(--ink)}
+h3{font-size:16px;color:var(--ink)}h4{color:#3c332b}
+.quick-summary .lenses{grid-template-columns:repeat(4,minmax(0,1fr))}
+.lens,.metric,.rubric-item,.section-card{background:var(--paper);border:1.5px solid var(--line);border-radius:8px;box-shadow:none}
+.lens b{color:var(--black)}
+.chip{background:#fff;border:1px solid var(--line);color:#2d261f;border-radius:999px}.chip.amber{background:#fff1b8;color:#4b3600}
+.controls{background:var(--paper);border:2px solid var(--black);border-radius:8px;box-shadow:5px 5px 0 var(--black);padding:16px;grid-template-columns:minmax(280px,420px) 1fr}
+select{border:2px solid var(--black);border-radius:8px;background:#fffef9;color:var(--black);font-weight:800;box-shadow:3px 3px 0 var(--black)}
+.team-hero{display:grid;grid-template-columns:1fr 220px;gap:18px;align-items:stretch;margin-bottom:16px}
+.team-identity{border:2px solid var(--black);border-radius:8px;background:linear-gradient(135deg,#fffdf8,#fff0ba);padding:18px;display:grid;grid-template-columns:auto 1fr;gap:16px;box-shadow:5px 5px 0 var(--black)}
+.team-avatar{width:76px;height:76px;border:2px solid var(--black);border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:1000;font-size:24px;box-shadow:4px 4px 0 var(--black)}
+.tone-0{background:var(--blue)}.tone-1{background:var(--red)}.tone-2{background:var(--yellow);color:#111}.tone-3{background:var(--green)}.tone-4{background:#111}
+.team-kicker{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:1000;color:var(--red)}
+.team-identity h2{font-family:Georgia,"Times New Roman",serif;font-size:34px;margin:2px 0 8px}
+.team-identity .sub{color:#52483f;font-weight:700}
+.score-plate{border:2px solid var(--black);border-radius:8px;background:#111;color:#fff;padding:16px;box-shadow:5px 5px 0 var(--black);display:grid;place-items:center;text-align:center}
+.score-ring{--pct:0%;width:122px;height:122px;border-radius:50%;background:conic-gradient(var(--tone,var(--blue)) var(--pct),#38332d 0);display:grid;place-items:center;border:2px solid #fff}
+.score-ring:before{content:"";position:absolute}
+.score-inner{width:84px;height:84px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;border:2px solid #111;font-weight:1000;font-size:26px;line-height:1}
+.score-inner small{display:block;font-size:11px;color:#6b6258;font-weight:900;text-transform:uppercase}
+.verdict{font-size:18px;color:#17130f;background:#fff;border:2px solid #111;border-radius:8px;padding:12px 14px;box-shadow:4px 4px 0 #111;margin:0 0 14px}
+.proof-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.proof-chip{border:1.5px solid var(--line);border-radius:8px;background:var(--paper);padding:12px}
+.proof-chip b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6b6258;margin-bottom:5px}
+.compact-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.section-card{padding:15px}.section-card.priority{background:#edf8ee;border-color:#b7d9bf}.section-card.warn{background:#fff2ee;border-color:#f0b9ad}
+.section-card h3{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.section-card h3:before{content:"";width:10px;height:10px;border:2px solid #111;border-radius:50%;background:var(--yellow);box-shadow:2px 2px 0 #111}
+.warn h3:before{background:var(--red)}.priority h3:before{background:var(--green)}
+.score-card{background:#111;color:#fff;border:2px solid #111;box-shadow:5px 5px 0 var(--black)}
+.score-card h3,.score-card .note{color:#fff}
+.score-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.score-mini{border:1.5px solid #fff;background:#fff;color:#111;border-radius:8px;padding:9px}
+.bar-row{display:grid;grid-template-columns:72px 1fr 46px;gap:8px;align-items:center;margin:8px 0;font-size:12px;font-weight:900}
+.bar-track{height:11px;border:1.5px solid #111;border-radius:999px;background:#fff;overflow:hidden}
+.bar-fill{height:100%;width:var(--w);background:linear-gradient(90deg,var(--blue),var(--green));border-right:1px solid #111}
+.table-wrap{border:2px solid var(--black);box-shadow:5px 5px 0 var(--black);background:#fffdf8}
+table{min-width:1180px}th{background:#111;color:#fff;border-color:#111}td{border-color:#eadccb}tr:hover td{background:#fff8e8}
+.rank-cell{display:flex;align-items:center;gap:10px}.rank-dot{width:34px;height:34px;border:2px solid #111;border-radius:8px;display:grid;place-items:center;font-weight:1000;background:#fff1b8;box-shadow:2px 2px 0 #111}
+.mini-scorebar{height:10px;width:120px;border:1.5px solid #111;border-radius:999px;background:#f1e8db;overflow:hidden;margin-top:7px}.mini-scorebar span{display:block;height:100%;width:var(--pct);background:linear-gradient(90deg,var(--red),var(--yellow),var(--green))}
+.ranking-list{display:grid;grid-template-columns:1fr;gap:14px}
+.rank-card{border:2px solid var(--black);border-radius:8px;background:#fffdf8;box-shadow:5px 5px 0 var(--black);padding:15px}
+.rank-card-head{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start}
+.rank-title{display:flex;align-items:center;gap:12px}.rank-title h3{margin:0;font-size:18px}.rank-score{border:2px solid #111;border-radius:8px;background:#111;color:#fff;padding:9px 12px;text-align:center;font-weight:1000;min-width:92px}.rank-score span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#f8f3ea}
+.rank-card .mini-scorebar{width:100%;height:12px;margin:12px 0}.rank-breakdown{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0 13px}.rank-breakdown span{border:1.5px solid #111;border-radius:999px;background:#fff;padding:4px 8px;font-size:12px;font-weight:900}
+.rank-detail-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.rank-detail{border:1.5px solid var(--line);border-radius:8px;background:#fffaf2;padding:10px}.rank-detail b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6b6258;margin-bottom:5px}.rank-detail p{margin:0;font-size:13px}
+.scenario-card{border:1.5px solid var(--line);border-radius:8px;background:#fffdf8;padding:13px;margin-top:12px}.scenario-options{display:grid;gap:7px;margin:10px 0 0;padding-left:28px}.scenario-options li{padding:7px 9px;border:1px solid #eadccb;border-radius:8px;background:#fffaf2}
+details{border:1.5px solid var(--line);background:#fffdf8}summary{color:#17130f}
+footer{max-width:1500px;margin:24px auto 0;color:var(--muted)}
+@media(max-width:1100px){.hero-shell,.visual-dashboard,.team-hero{grid-template-columns:1fr}.hero-art{min-height:300px;border-left:0;border-top:2px solid var(--black)}.quick-summary .lenses,.proof-strip,.compact-row,.rank-detail-grid{grid-template-columns:1fr 1fr}.score-plate{min-height:190px}}
+@media(max-width:720px){.site-hero,main{padding-left:14px;padding-right:14px}.hero-copy{padding:22px}.quick-summary .lenses,.proof-strip,.compact-row,.grid-2,.grid-3,.lenses{grid-template-columns:1fr}.team-identity{grid-template-columns:1fr}.team-avatar{width:62px;height:62px}.score-grid{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.site-hero h1{font-size:38px}}
+@media(max-width:720px){.rank-card-head,.rank-detail-grid{grid-template-columns:1fr}.rank-score{text-align:left}.rank-title{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header class="site-hero">
+  <div class="hero-shell">
+    <div class="hero-copy">
+      <div>
+        <p class="eyebrow">Judge workspace / Day 1 rubric</p>
+        <h1>ECP Bootcamp 3.0 Judge Report</h1>
+        <p class="hero-lede">Evidence-backed scoring guidance, security critique, and published-work findings across all 11 teams.</p>
+      </div>
+      <div>
+        <div class="hero-meta">
+          <span>11 teams</span><span>Suggested scores</span><span>Security-heavy Q&A</span><span>MITRE ATLAS lens</span>
+        </div>
+        <nav class="pill-nav" aria-label="Report shortcuts">
+          <a href="#comparisonTable">Scoreboard</a>
+          <a href="#teamSelect">Team review</a>
+          <a href="#teamPanel">Evidence cards</a>
+          <a href="#teamPanel">Threat lens</a>
+        </nav>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/judge-report-cover.png" alt="Illustrated dashboard with scorecards, audit trails, AI workflow nodes, and security review panels">
+    </div>
+  </div>
+</header>
+<main>
+  <section class="visual-dashboard" aria-label="Visual report overview">
+    <div class="poster-card">
+      <div class="poster-mark" aria-hidden="true"></div>
+      <div>
+        <h2>Judge Focus</h2>
+        <p>Day 1 rubric calibration, execution risk, security posture, value evidence, and targeted Q&A.</p>
+      </div>
+    </div>
+    <div class="stat-tile"><div class="num">11</div><div class="label">Teams reviewed</div><div class="caption">All submitted presentation folders included.</div></div>
+    <div class="stat-tile"><div class="num">5</div><div class="label">Rubric areas</div><div class="caption">Problem, priority, governance, value, POC.</div></div>
+    <div class="stat-tile"><div class="num">4</div><div class="label">Published checks</div><div class="caption">Nexa, Hoppers, Suchaiirmon, Girls Power.</div></div>
+  </section>
+  <section class="panel quick-summary">
+    <h2>Judge Quick Read</h2>
+    <div class="lenses">
+      <div class="lens"><b>Reward</b><br>Clear use-case choice, real prototype evidence, deterministic controls for regulated work, and honest value assumptions.</div><div class="lens"><b>Challenge</b><br>Claims like secure, permission-aware, private cloud, autonomous, immutable, or ROI are not evidence until they can explain implementation.</div><div class="lens"><b>Security minimum</b><br>Ask for identity, ACL filtering, secret handling, audit logs, model data boundary, tool permissions, and incident owner.</div><div class="lens"><b>Budget minimum</b><br>Ask what is missing from Year 1 cost: integration, SME validation, model usage, monitoring, support, security review, and data cleanup.</div>
+    </div>
+    <p class="note" style="margin-top:10px">Suggested scores are calibration guidance only, using the Day 1 weights: Problem 15, Priority 20, AI Governance 25, Value 20, POC Feasibility 20. Public-code evidence now adjusts governance and feasibility where it contradicts slide claims.</p>
+  </section>
+  <section class="panel warn">
+    <h2>Published Work Security Addendum</h2>
+    <p class="note">Scope checked on 23 June 2026: public repositories linked by slides or supplied by the judge, Git history hygiene, static code review, Bandit, pip-audit/npm audit, and light HTTP checks for the Hoppers live app. No secret values are displayed.</p>
+    <div class="lenses">
+      <div class="lens"><b>Nexa</b><br>Repo review materially weakens the security story: historical .env exposure, unauthenticated approval/admin/SAP endpoints, role checks declared but not enforced, SSRF/TLS validation gaps.</div>
+      <div class="lens"><b>Hoppers</b><br>Repo contains Teams bot/RAG code and committed vector data. Live Render app behaves like a static Vite site; POST /api/messages returns 404, so the deployed demo does not prove the submitted bot backend.</div>
+      <div class="lens"><b>Suchaiirmon</b><br>Repo shows a real desktop prototype, but Docker defaults expose weak DB credentials and unauthenticated Mongo Express; crawler accepts custom URLs; dependency audit flags ChromaDB/lxml issues.</div>
+      <div class="lens"><b>Girls Power</b><br>Only a Figma link was found. Treat as prototype/UI evidence, not executable code or security proof.</div>
+    </div>
+  </section>
+  <section class="panel preface-dense">
+    <h2>Day 1 Rubric Anchor</h2>
+    <div class="rubric-grid">
+      <div class="rubric-item"><strong>Business Problem Clarity &amp; Relevance <span class="note">15%</span></strong><div>Real enterprise problem, impacted stakeholders, urgency, and why leadership should care.</div></div><div class="rubric-item"><strong>Ability to Prioritize Work Items <span class="note">20%</span></strong><div>Justifies the chosen use case over alternatives using value, risk, and feasibility trade-offs.</div></div><div class="rubric-item"><strong>AI Partnership &amp; Governance Awareness <span class="note">25%</span></strong><div>Positions AI as productivity support with human accountability, risk awareness, governance, monitoring, and controls.</div></div><div class="rubric-item"><strong>Quantify Potential Value <span class="note">20%</span></strong><div>Quantifies hard/soft value and explains assumptions, methodology, and measurable outcomes.</div></div><div class="rubric-item"><strong>Feasibility of POC / Prototype <span class="note">20%</span></strong><div>Shows realistic scope, execution path, prototype evidence, and ability to defend the plan in Q&amp;A.</div></div>
+    </div>
+  </section>
+  <section class="panel priority preface-dense">
+    <h2>What Good Looks Like: Enterprise RAG And Agentic AI Controls</h2>
+    <p class="note">Use this as the interpretation layer. A team saying "permission-aware RAG" or "secure AI agent" should be able to explain these controls without hand-waving.</p>
+    <div class="lenses">
+      <div class="lens"><b>Before indexing</b><br>Inventory source owners, classify data, run DLP/secret scans, remove passwords/API keys, capture source ACLs/groups/sensitivity labels, and reject sources without ownership or freshness rules.</div><div class="lens"><b>Vector/index metadata</b><br>Each chunk should carry tenant/site, source system, document ID, owner, classification, sensitivity label, allowed groups/users, effective date, version, and expiry/review date.</div><div class="lens"><b>Retrieval-time security trimming</b><br>The query must include the current user's identity/groups and filter out unauthorized chunks before semantic search results reach the LLM. Qdrant-style payload filters, Azure AI Search ACL filters, Pinecone metadata filters, or equivalent controls are expected.</div><div class="lens"><b>Generation-time containment</b><br>The LLM should receive only authorized chunks, cite sources, refuse unsupported answers, redact sensitive content, and avoid turning retrieved document text into executable instructions.</div><div class="lens"><b>Agent/tool boundary</b><br>Agents should use read-only tools by default. Write actions, workflow approvals, ERP updates, ticket changes, code changes, and file exports need separate authorization, human approval, and immutable audit logs.</div><div class="lens"><b>Operations and proof</b><br>Ask for permission-change sync timing, access recertification, stale-document workflow, prompt-injection tests, hallucination evals, cost quotas, monitoring alerts, incident owner, and rollback path.</div>
+    </div>
+  </section>
+  <section class="panel preface-dense">
+    <h2>Additional Judge Lenses</h2>
+    <div class="lenses">
+      <div class="lens"><b>Data readiness and source quality</b><br>Does the team prove that source data is complete, current, authorized, and governed?</div><div class="lens"><b>Human-in-the-loop accountability</b><br>Is the human role a real decision point, or decorative sign-off after automation has effectively decided?</div><div class="lens"><b>Access control and least privilege</b><br>Are roles, permissions, approval rights, data scopes, and privileged actions explicit?</div><div class="lens"><b>Auditability and traceability</b><br>Can every AI recommendation be traced to input data, source version, model/prompt version, reviewer, and decision?</div><div class="lens"><b>Hallucination and model-risk controls</b><br>Are retrieval grounding, confidence thresholds, deterministic calculations, test sets, and escalation paths defined?</div><div class="lens"><b>Regulatory and legal exposure</b><br>Does the team identify which outputs can create compliance, customs, financial, production, or safety risk?</div><div class="lens"><b>Integration burden</b><br>Does the POC account for ERP/SAP/e2open/Teams/SharePoint/MES/CI-CD integration and ownership?</div><div class="lens"><b>Operational ownership</b><br>Who maintains sources, rules, prompts, models, logs, monitoring, incidents, and user support after the pitch?</div><div class="lens"><b>Budget and ROI credibility</b><br>Are benefits based on validated volumes, rates, error probabilities, and implementation/operating costs?</div><div class="lens"><b>Adoption and change management</b><br>Will users trust it, use it, and avoid duplicating the old manual process?</div>
+    </div>
+  </section>
+  <section class="panel preface-dense">
+    <h2>MITRE ATLAS Supplemental AI Threat Lens</h2>
+    <p class="note">Use this as an AI-security challenge lens, not a replacement for the Day 1 rubric. Source: MITRE ATLAS, Adversarial Threat Landscape for AI Systems, release 2026.05, modified 2026-05-27. External framework evidence is separate from slide evidence.</p>
+    <div class="lenses">
+      <div class="lens"><b>LLM Prompt Injection (AML.T0051)</b><br>Can supplier PDFs, SOPs, tickets, web pages, or user prompts override instructions, expose data, or trigger unsafe actions?</div><div class="lens"><b>LLM Data Leakage (AML.T0057)</b><br>Can the model reveal restricted SOPs, trade data, source code, prompts, credentials, or decision history?</div><div class="lens"><b>Unsecured Credentials (AML.T0055)</b><br>Are secrets, environment variables, API keys, bot credentials, or service accounts kept out of repositories and logs?</div><div class="lens"><b>AI Agent Tool Invocation (AML.T0053)</b><br>Can an agent call ERP, workflow, email, storage, CI/CD, or ticketing tools beyond the user's authority?</div><div class="lens"><b>Exfiltration via AI Agent Tool Invocation (AML.T0086)</b><br>Can a tool-enabled agent send data to an unauthorized destination through a permitted integration?</div><div class="lens"><b>Cost Harvesting (AML.T0034)</b><br>Can high-volume, high-complexity, or agent fan-out requests create unbounded cloud/model costs?</div><div class="lens"><b>AI Supply Chain Compromise (AML.T0010)</b><br>Are models, packages, plugins, datasets, and agent tools verified before being trusted?</div><div class="lens"><b>Restrict Agent Tool Invocation On Untrusted Data (AML.M0030)</b><br>Do controls block tool execution when instructions originate from untrusted documents or user content?</div>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>Suggested Score Ranking</h2>
+    <div id="comparisonTable" class="ranking-list" role="list"></div>
+  </section>
+  <div class="controls">
+    <div>
+      <label for="teamSelect">Select team</label>
+      <select id="teamSelect"></select>
+    </div>
+    <div class="note">Scores use the Day 1 rubric weights and published-work evidence where available.</div>
+  </div>
+  <section class="panel" id="teamPanel"></section>
+  <footer>Source scope: slides for all teams; public repos/live artifacts reviewed only where teams published them or the judge supplied the link. Industry-control baseline references: <a href="https://learn.microsoft.com/en-us/azure/search/search-document-level-access-overview">Microsoft Azure AI Search document-level access</a>, <a href="https://qdrant.tech/documentation/concepts/filtering/">Qdrant payload filtering</a>, <a href="https://docs.pinecone.io/guides/search/filter-by-metadata">Pinecone metadata filtering</a>, and <a href="https://atlas.mitre.org/">MITRE ATLAS</a>. Student/member names were intentionally omitted.</footer>
+</main>
+<script id="report-data" type="application/json">[{"id": "tnt2", "teamNo": 1, "name": "TNT²", "folder": "TNT²", "useCase": "Use Case 1 - IT onboarding knowledge platform", "intent": "Permission-aware RAG onboarding platform to centralize IT knowledge, reduce repeated SME support, and improve new-hire productivity.", "execution": "Mockups / architecture / risk matrix. No external links evaluated.", "securityMaturity": "Medium: good control vocabulary, but several controls remain planned.", "valueEvidence": "Time-based ROI: 660 new-hire hours + 840 SME hours claimed annually, but no cost/TCO model.", "majorFlag": "ROI math and implementation cost are underdeveloped; several security controls are labelled planned rather than current.", "evidence": ["S3 contrasts generic chatbot risks with permission-aware RAG, human review, classification, and grounding.", "S12 shows confidence scoring and grounding gates.", "S13-S15 quantify 1,500 hours/year, with a visible 600/660 inconsistency.", "S16-S17 show risk matrix and defense-in-depth controls."], "strengths": ["Clearly distinguishes the proposal from a normal chatbot by adding permission-aware RAG, source scoring, grounding checks, and human review.", "Strong relevance to the onboarding use case: fragmentation, weak governance, and human dependency are tied directly to the case brief.", "Risk register covers unauthorized access, hallucination, outdated retrieval, knowledge gaps, adoption, and confidential leakage.", "Security framework separates identity/access, data governance, human oversight, platform protection, and detection/response."], "weaknesses": ["Prioritization is asserted rather than deeply proven; Use Case 1 is chosen for balance, but value/risk/feasibility trade-offs are not quantified against Use Cases 2 and 3.", "The ROI is only time-based. There is no implementation budget, recurring cost, licensing cost, vector DB cost, monitoring cost, or maintenance owner.", "Several key controls are marked planned, which weakens the claim that the POC is already secure enough for enterprise data.", "Architecture and use-case diagrams are present but not explained enough for a judge to know what is prototype-ready versus conceptual."], "rubric": {"Business Problem Clarity & Relevance": "Good fit to Use Case 1, with direct reference to fragmented IT knowledge and senior-engineer dependency (S2, S5).", "Ability to Prioritize Work Items": "Explains why Use Case 1 is lower compliance/operational risk than the alternatives, but the comparison is qualitative (S4).", "AI Partnership & Governance Awareness": "Permission-aware RAG, human review, source scoring, and risk register are strong signs of responsible AI framing (S3, S12, S16-S17).", "Quantify Potential Value": "Provides time savings but not monetary savings or project cost; one line has a visible 600/660 inconsistency (S13-S15).", "Feasibility of POC / Prototype": "Mockups and diagrams support feasibility, but the deck does not show integration details for SharePoint, Workday, SOP repositories, or Teams."}, "security": ["Ask whether RAG inherits permissions at query time, document-chunk time, or both; stale permission indexes can leak data.", "Planned controls should be separated from current POC controls before judging execution readiness.", "DLP/audit logs are mentioned, but log retention, alert thresholds, and incident-response ownership are not specified.", "Data classification is named but not mapped to actual Jabil document classes or allowed/blocked retrieval behavior."], "budget": ["No build cost, run cost, model/token cost, storage cost, or support model is supplied.", "Time-savings estimate needs a conversion to cost or productivity value and a clear count of target hires/users.", "ROI should include content-cleanup effort, SME review time, source-owner maintenance, and audit operations."], "questions": ["How do you prevent a new hire from retrieving admin SOP content through a semantically similar query?", "Which controls are live in the POC today versus planned after approval?", "Who owns document freshness and access-review recertification?", "What does the 1,500 hours/year translate to financially after implementation and maintenance cost?", "How will you test hallucination rate and source-grounding failure before rollout?"]}, {"id": "o1", "teamNo": 2, "name": "O(1) Sleep O(n) Gain", "folder": "O(1) Sleep O(n) Gain", "useCase": "Use Case 2 - Tariff calculation automation", "intent": "Tariff Co-Pilot combining retrieval, deterministic tariff/FTA calculations, AI explanation, analyst approval, and audit-ready reporting.", "execution": "Strong prototype proof through dashboard/report screenshots and a controlled pilot methodology.", "securityMaturity": "High conceptually: governance, RBAC, encryption, evidence grounding, and AI-must-not boundaries are explicit.", "valueEvidence": "Uses case-study targets and explicitly labels them as unvalidated until pilot testing.", "majorFlag": "Strong on method, weaker on budget/TCO; cost, ownership, and enterprise integration effort are not quantified.", "evidence": ["S1 defines governed evidence layer: AI recommends, humans keep final control.", "S6-S11 separate deterministic calculations from AI explanations.", "S12-S20 show current prototype screenshots including AI review, upload, knowledge stores, final report, RBAC login, and dashboard.", "S21 explicitly says benefits are case-study targets, not validated prototype results.", "S22-S25 define benchmarking, decision gates, rollout challenges, and AI-must-not boundaries."], "strengths": ["Excellent governance posture: deterministic services perform regulated calculations while AI explains and recommends, reducing model-risk exposure.", "One of the clearest decks on what is prototype evidence versus future-state agentic automation.", "Benchmarking plan is judge-friendly: controlled dataset, SME reference answers, A/B manual vs Co-Pilot review, speed/quality/governance metrics, and scale decision gate.", "Enterprise readiness section names real rollout challenges: ERP formats, tariff rule changes, sensitive data, incorrect retrieval, analyst adoption."], "weaknesses": ["Selection rationale is credible but could compare harder against onboarding and MES using a weighted value/risk/feasibility matrix.", "No budget, cloud-cost estimate, support staffing, compliance-review cost, or TCO is provided.", "Current prototype status is visually strong, but the deck does not prove accuracy, latency, or audit completeness with test results.", "The future agentic roadmap needs guardrails around when workflow orchestration can change behavior and who approves that change."], "rubric": {"Business Problem Clarity & Relevance": "Strong: fragmented tariff review, evidence handling, FTA risk, and traceability pain are clearly described (S3-S5).", "Ability to Prioritize Work Items": "Good: identifies enterprise relevance and governance fit, though alternative-case comparison is not deeply quantified (S3).", "AI Partnership & Governance Awareness": "Very strong evidence: humans decide, deterministic rules calculate, AI explains, and AI-must-not boundaries are explicit (S6, S11, S25).", "Quantify Potential Value": "Good discipline: targets are listed but labelled unvalidated, with a pilot method to verify them (S21-S23). Missing cost model.", "Feasibility of POC / Prototype": "Strong: multiple current prototype screens and a controlled pilot plan are presented (S12-S20, S22-S25)."}, "security": ["Good separation of legal/financial calculations from LLM-generated explanation.", "Needs more detail on source authorization, retention, model-prompt logging, and tamper-proof audit storage.", "RBAC login is shown, but role privileges, approval delegation, and break-glass workflow are not specified.", "Incorrect retrieval is acknowledged; judge should ask for precision/recall and false-positive testing against known tariff decisions."], "budget": ["No direct cost estimate for model inference, hosting, storage, security monitoring, implementation, or trade SME validation.", "The team should quantify pilot size, number of SME hours required, and cost to maintain approved tariff/FTA source libraries.", "Benefit model is intentionally not overclaimed, which is good, but judges still need a cost denominator."], "questions": ["Which exact outputs are deterministic calculations and which are model-generated explanations?", "How will you prove audit logs cannot be altered after analyst approval?", "What is the minimum accuracy or evidence-completeness threshold before moving from pilot to live parallel run?", "Who approves regulatory source changes and model/version updates?", "What is the estimated monthly run cost and who supports this after the bootcamp?"]}, {"id": "mind", "teamNo": 3, "name": "Mind Control", "folder": "Mind Control", "useCase": "Use Case 1 - AI-driven IT onboarding and knowledge intelligence", "intent": "Centralized RAG knowledge platform to accelerate onboarding, deflect routine tickets, and reduce senior-staff mentoring load.", "execution": "Mockup screens for login, onboarding, smart search, IT support, and admin dashboard.", "securityMaturity": "Medium: private RAG, RBAC, audit/compliance are mentioned, but the control design is shallow.", "valueEvidence": "Claims 50% ramp-up reduction, 5-8 hours/week senior time recovery, and 40% ticket deflection; no cost model.", "majorFlag": "No explicit prioritization versus the other use cases and no implementation budget.", "evidence": ["S3-S6 define fragmented knowledge, slow retrieval, senior dependency, and objectives.", "S7-S10 discuss AI-human workflow, mandatory human judgment, uncertainty handling, and accountability.", "S11 mentions private RAG, secure vector DB, RBAC, and audit trail.", "S12-S14 provide impact claims and residual-risk themes.", "S15-S19 show UI mockups."], "strengths": ["Clear and simple problem statement aligned to the case brief.", "Good attempt to define when human judgment remains mandatory and how uncertain outputs are escalated.", "Mockup screens make the proposed user experience more concrete than a pure concept deck.", "Residual-risk section recognizes garbage-in/garbage-out, source citation, and the cultural role of human coaching."], "weaknesses": ["Little evidence of structured prioritization against Use Cases 2 and 3.", "Security claims are generic; GDPR/SOC2 mentions need relevance and implementation detail.", "Value claims are not backed by formulas, assumptions, employee counts, or cost conversion.", "No explanation of source ingestion, source ownership, access recertification, or stale-document handling."], "rubric": {"Business Problem Clarity & Relevance": "Clear Use Case 1 problem and objectives (S3-S6).", "Ability to Prioritize Work Items": "Weak: the deck does not materially justify why Use Case 1 beats the other two options.", "AI Partnership & Governance Awareness": "Moderate: RAG, RBAC, audit, human approval, and source-backed responses are present (S7-S13).", "Quantify Potential Value": "Directional claims only: 50% ramp-up, 5-8 hours/week, and 40% ticket deflection without assumptions or budget (S12, S14).", "Feasibility of POC / Prototype": "Mockups show intended workflow, but technical integration and data readiness are not proven (S15-S19)."}, "security": ["RBAC inheritance must be proven against real source-system permissions, not just application roles.", "Secure vector DB is named but encryption, key management, tenant isolation, and log access are not specified.", "Audit/compliance language should specify which events are logged, who reviews them, and retention requirements.", "Ticket deflection involving VPN/password/access topics could create social-engineering exposure if identity verification is weak."], "budget": ["No development or operating-cost estimate.", "No model/token, vector DB, content-cleanup, SME curation, or helpdesk support cost.", "Claims should convert hours and ticket deflection into a measurable business value."], "questions": ["Why is onboarding the highest-priority use case compared with tariff and MES?", "How does the AI inherit source-system permissions at answer time?", "What happens when a cited source is outdated or conflicts with another SOP?", "What exact events are in the audit trail and who reviews them?", "How much will the platform cost to build and maintain for the first year?"]}, {"id": "girls", "teamNo": 4, "name": "Girls Power", "folder": "Girls Power", "useCase": "Use Case 2 - Tariff calculation automation", "intent": "AITradeX platform for automated data extraction, duty calculation, HTS recommendations, human approval, and audit-ready governance.", "execution": "Strong slide evidence with UI mockups, transformation metrics, ROI formula, break-even chart, governance controls, and risk matrix.", "securityMaturity": "High: encryption, private cloud, RBAC, MFA, least privilege, source attribution, retention, override, sign-off, escalation, and model review are covered.", "valueEvidence": "Detailed ROI: 12.5h to 15m, $2,429 benefit/batch, $873K annual benefit, $90K investment, <4-month payback, 1,481% three-year ROI.", "majorFlag": "ROI and risk-reduction assumptions are bold and need validation against real shipment volumes, analyst rates, error rates, and implementation cost.", "evidence": ["S2-S3 position Use Case 2 as direct, quantifiable, and defensible.", "S11-S15 provide before/after metrics, formula, annual scaling, break-even, and hard/soft benefits.", "S16-S19 cover security/governance, residual risk, HITL workflow, and risk mitigation.", "S6-S10 show Figma/mockup screens in the deck; external Figma link was not evaluated."], "strengths": ["One of the strongest value-quantification decks, with transparent formula components and explicit annual scaling.", "Security and governance section is unusually complete for Day 1: data classification, encryption, private cloud, RBAC, MFA, least privilege, source attribution, retention, override, accountability, escalation, and quarterly model review.", "Good what-this-does-not-solve framing: missing supplier data, overnight policy changes, token costs, sanctions/legal disputes, high-risk categories.", "Human approval is non-bypassable and repeatedly emphasized."], "weaknesses": ["The 98% processing-time reduction, 80% risk reduction, and <$500 residual exposure need empirical basis.", "The model assumes 3 analysts and 10 batches/month; judges should test whether this is a real Jabil baseline.", "Implementation cost is summarized as $90K but not broken down into labor, systems integration, security, model, operations, and compliance validation.", "Quarterly model review may be too slow for fast-moving customs changes unless paired with urgent regulatory update controls."], "rubric": {"Business Problem Clarity & Relevance": "Strong: manual effort, countries, financial exposure, and analyst bottleneck are clear (S2-S4).", "Ability to Prioritize Work Items": "Good: clear rationale for Use Case 2, though comparison against other cases could be more structured (S2).", "AI Partnership & Governance Awareness": "Strong: advisory-only AI, licensed analyst sign-off, RBAC/MFA, source attribution, retention, and escalation are explicit (S16-S18).", "Quantify Potential Value": "Strongest area: formula, annualized benefit, break-even, and ROI are stated (S11-S15). Needs validation.", "Feasibility of POC / Prototype": "Good mockup/prototype evidence, but external Figma was not evaluated; integration architecture is still light (S6-S10)."}, "security": ["Private cloud and data-never-leaves-perimeter claims must be mapped to actual model deployment architecture.", "7-year retention should be checked against local legal/regulatory needs and data-minimization policy.", "Least-privilege ERP API access needs exact scopes: read-only, write-back, approval, audit export.", "Quarterly model review may not cover urgent tariff changes; ask for event-driven review triggers."], "budget": ["$90K investment is useful but under-detailed.", "$35/hour source appears externally sourced in the slide; judges should ask whether Jabil internal rates differ.", "$2,000 risk avoided per batch is the main ROI driver and must be validated with actual error probability and impact.", "Token-cost monitoring is acknowledged, but not included in the budget math shown."], "questions": ["What evidence supports 15 minutes per 50-shipment batch and 80% risk reduction?", "What is included in the $90K investment, and what is recurring after Year 1?", "How do you technically enforce that analyst approval cannot be bypassed?", "What exact data leaves or stays inside Jabil when the AI recommends HTS codes?", "How quickly can the system react to an urgent tariff or sanctions change?"]}, {"id": "apex", "teamNo": 5, "name": "APEX Innovators", "folder": "APEX Innovators", "useCase": "Use Case 3 - AI-governed SDLC acceleration for MES modernization", "intent": "AI-assisted requirements analysis, secure code copilot, automated test generation, and governance gateway for MES delivery.", "execution": "Strong concept mockups and quantified targets; no live repo/demo evaluated.", "securityMaturity": "Medium-high: RBAC, audit trail, human override, and no auto-deploy are explicit, but secure SDLC threat controls need depth.", "valueEvidence": "Targets 50% faster PBI cycle time, <10 defects per release, 70% SQA effort reduction, and near-zero pre-merge defect-fix cost.", "majorFlag": "Aggressive 7-week rollout and near-zero defect-fix claim are high-risk without pilot evidence, code-quality metrics, or test coverage proof.", "evidence": ["S2 shows baseline: vague PBIs, 50+ defects/release, 20 SQAs x 1 month regression.", "S3 compares use cases and chooses SDLC for pipeline-wide impact.", "S4-S9 define requirements analyzer, secure code copilot, test generator, and HITL governance.", "S10 quantifies target improvements.", "S11-S13 cover governance controls, risks, mitigations, and phased rollout."], "strengths": ["Strong alignment to Use Case 3 and MES modernization pain: requirements ambiguity, defect leakage, manual regression, and sprint delays.", "Good AI-human workflow: AI drafts/analyzes/generates while humans clarify, review, approve, and ship.", "Governance gateway is clearly presented as non-bypassable before production.", "Quantified targets are easy for judges to test in Q&A."], "weaknesses": ["Revenue-driver claim is asserted but not backed by billable revenue, delivery economics, or customer impact assumptions.", "Targets are ambitious and not tied to a validation plan or baseline measurement method.", "Secure Code Copilot needs much deeper controls: dependency scanning, secret detection, SAST/DAST, code provenance, prompt/data leakage, and IP handling.", "7-week full SDLC integration across multiple sites is likely too compressed for MES environments."], "rubric": {"Business Problem Clarity & Relevance": "Strong: baseline defects, PBI cycle time, and regression workload are clearly linked to MES risk (S2).", "Ability to Prioritize Work Items": "Good comparison is present, but revenue and ROI reasoning could be more defensible (S3).", "AI Partnership & Governance Awareness": "Good HITL and no-auto-deploy posture (S5, S9, S11). Security depth is moderate.", "Quantify Potential Value": "Targets are clear but unvalidated; methodology and cost assumptions are limited (S10).", "Feasibility of POC / Prototype": "Mockups and phased rollout help, but timeline and integration scope feel optimistic (S6-S13)."}, "security": ["Generated code should be gated by SAST, dependency/license checks, secret scanning, test coverage thresholds, and human review.", "AI-generated tests can create false confidence if they mirror flawed requirements; independent validation is needed.", "Model access to MES code and requirements raises IP, source-code leakage, and least-privilege questions.", "Audit trail should record prompt, context, model version, generated artifact, reviewer, and approval decision."], "budget": ["No cost model for tooling, licenses, cloud/model use, CI/CD integration, security scanners, or reviewer time.", "Savings targets should be converted into cost avoided or release-cycle value, with assumptions.", "The cost of adoption/training and maintaining prompts/policies/test frameworks is omitted."], "questions": ["How will you prevent AI-generated code from introducing insecure logic into MES?", "Which security gates block merge and deployment?", "What baseline data supports 80% defect reduction and 70% SQA effort reduction?", "What does near zero defect-fix cost mean operationally?", "Can a 7-week rollout realistically integrate with MES code, CI/CD, QA, and governance?"]}, {"id": "suchaiirmon", "teamNo": 6, "name": "Suchaiirmon", "folder": "Suchaiirmon", "useCase": "Use Case 2 - Tariff calculation automation", "intent": "Jabil Trade AI Assistant using document extraction, RAG/web crawling, Gemini reasoning, financial calculation, and a PySide6 compliance dashboard.", "execution": "Architecture, flowchart, stack choices, and GitHub/YouTube links in deck; external links not evaluated.", "securityMaturity": "Medium: role-based access and desktop/intranet attack-surface reduction are discussed, but cloud/model/data controls are incomplete.", "valueEvidence": "Claims 98% time reduction, 75% manual-step reduction, and $2,000 direct savings per batch; no cost model.", "majorFlag": "Web crawling regulatory sources plus Gemini reasoning is risky unless source validation, change control, and data-boundary controls are explicit.", "evidence": ["S2-S4 justify Use Case 2 and describe manual tariff pain.", "S5 names pdfplumber, EasyOCR, ChromaDB, web crawler, Gemini, financial calculation, PySide6 dashboard, and SAP-compatible Excel export.", "S8 shows AI-human workflow components.", "S9 argues PySide6 reduces public web attack surface.", "S11-S13 list benefits, constraints, and residual risks."], "strengths": ["Specific technical stack and architecture make the POC more concrete than many concept-only decks.", "Acknowledges that the tool cannot replace legal accountability, guarantee perfect classification, or compensate for bad source data.", "Role-based separation between analysts and administrators is a useful start.", "Tariff domain risks are well understood at a high level."], "weaknesses": ["Security argument that PySide6 avoids web risks is incomplete; desktop apps still face credential, endpoint, update, malware, and data-exfiltration risks.", "External model choice and data transfer boundaries are not explained; financial/trade data may be sensitive.", "No budget, run cost, model cost, OCR maintenance, crawler maintenance, or SME validation cost.", "Web crawler governance is under-specified: authoritative source list, update validation, rollback, and poisoning resistance are not shown."], "rubric": {"Business Problem Clarity & Relevance": "Good: tariff pain, manual workflow, exposure, and regulatory explainability are clearly described (S2-S4).", "Ability to Prioritize Work Items": "Good but high-level: Use Case 2 is framed as strong impact, measurable ROI, governance alignment, and scalability (S2).", "AI Partnership & Governance Awareness": "Moderate: HITL dashboard and residual risks are present, but governance controls need more specificity (S5, S9, S12-S13).", "Quantify Potential Value": "Claims benefits but does not show formula, cost, or validation method (S10-S11).", "Feasibility of POC / Prototype": "Technical stack is concrete; external repo/video were not evaluated. Integration and data-boundary proof remain open."}, "security": ["Ask exactly what data is sent to Gemini and whether production data is used.", "Web crawler needs allow-listed official sources, content integrity checks, effective dating, approval workflow, and rollback.", "OCR/parser pipeline must defend against malicious PDFs, prompt injection, and document-borne malware.", "Desktop deployment needs endpoint hardening, signed updates, local data encryption, and credential storage controls."], "budget": ["No project investment or operating cost is supplied.", "OCR, crawler maintenance, vector DB, model API, SME review, SAP export validation, and endpoint deployment are omitted.", "$2,000 per-batch savings appears inherited from the case and not independently justified."], "questions": ["What exact trade data is sent to Gemini, and how is it redacted?", "How do you prevent a poisoned or outdated crawled source from affecting HS recommendations?", "How is analyst approval recorded and protected from tampering?", "Why is PySide6 safer for Jabil's environment than a web app, considering endpoint risks?", "What is the Year 1 cost and who maintains the crawler/source library?"]}, {"id": "4real", "teamNo": 7, "name": "4Real", "folder": "4Real", "useCase": "Use Case 2 - Tariff regulations and automated calculation engine", "intent": "TRACE system to cross-reference ERP, Excel/PDF documents, supplier declarations, bills of materials, COO certificates, and FTA regulations for analyst review.", "execution": "Polished visual pitch with governance, security, impact dashboard, cost slide, roadmap, and risks; much detail is image-based.", "securityMaturity": "Medium: governance pillars and perimeter architecture are shown, but details are conceptual.", "valueEvidence": "Claims 98% process efficiency, $16M annual savings on 8,000 batches, 98K hours returned, and ~$1,100 monthly regional infrastructure cost.", "majorFlag": "Very large savings and very low cost need hard validation; 15 minutes autonomous wording conflicts with analyst sign-off expectations.", "evidence": ["S2-S5 define the trade analyst pain and multi-system data fragmentation.", "S6 shows 8 manual steps reduced to 2: automated ingestion and strategic sign-off.", "S7-S8 show governance and data-sovereignty visuals.", "S9-S12 claim 98% efficiency, $16M savings, 98K hours returned, impact comparison, and $1,100 infrastructure cost.", "S13-S14 show roadmap and implementation risks."], "strengths": ["Strong executive storytelling: personifies the analyst pain and connects it to systems fragmentation.", "Clear prioritization matrix comparing speed to value, data readiness, measurability, implementation risk, and AI appropriateness.", "Recognizes governance, data sovereignty, compliance, data quality, regulatory updates, change management, and site-readiness risks.", "Simple cost/benefit story is easy for stakeholders to understand."], "weaknesses": ["Cost and savings appear under-substantiated: $16M/year and only ~$1,100 fixed monthly infrastructure per region are likely too simplified for enterprise integration.", "The 15-minute autonomous wording may overstate automation in a regulated tariff process that requires human accountability.", "Security architecture uses high-level visuals but lacks RBAC roles, key management, log retention, model data boundaries, and incident response.", "No detailed prototype evidence beyond visual process and dashboard concepts."], "rubric": {"Business Problem Clarity & Relevance": "Strong problem story and system-fragmentation framing (S2-S5).", "Ability to Prioritize Work Items": "Good matrix-based comparison of the three use cases (S4).", "AI Partnership & Governance Awareness": "Governance pillars and perimeter controls are present, but technical detail is limited (S7-S8).", "Quantify Potential Value": "High-impact numbers are shown, but methodology is not sufficiently transparent (S9-S12).", "Feasibility of POC / Prototype": "Roadmap exists, but cost/integration and POC details need more proof (S13-S14)."}, "security": ["Data-sovereignty visual must be translated into exact deployment: tenant, network boundary, model endpoint, and storage.", "Need to define analyst/approver/auditor/admin roles and least-privilege access.", "WORM audit logs are claimed; judge should ask what storage technology enforces immutability.", "Supplier declarations and PDFs can carry malicious content; ingestion sanitization is not described."], "budget": ["$16M annual savings based on 8,000 batches should be reconciled against actual batch count, labor rate, risk probability, and current error rate.", "~$1,100 monthly fixed cost excludes implementation labor, integration, security review, validation, support, data migration, and compliance SME time.", "OpenAI cost at $0.005/batch seems too low unless prompt size, retrieval, retries, and audit storage are calculated."], "questions": ["How did you calculate $16M annual savings and 98K hours returned?", "What does 15 minutes autonomous mean if analysts must review and sign off?", "How is the WORM audit log implemented and who can delete or amend records?", "What sensitive data reaches the AI model, if any?", "What cost categories are missing from the $1,100 infrastructure estimate?"]}, {"id": "uo", "teamNo": 8, "name": "UO Double U Pro Max", "folder": "UO Double U Pro Max", "useCase": "Use Case 2 - Tariff calculation automation", "intent": "Agentic tariff workflow using Lean Six Sigma framing, multi-agent FTA/COO orchestration, dashboards, identity gate, security framework, and project-cost model.", "execution": "Most extensive visual/demo deck: 37 slides with workflow diagrams, dashboard screenshots, AI agent screens, governance slides, and project cost.", "securityMaturity": "Medium: many security ideas, but some are buzzword-heavy or under-explained.", "valueEvidence": "RM341,100 Year 1 investment, RM444,000 annual benefits, payback ~9.2 months; detailed cost categories shown.", "majorFlag": "Security framework contains unclear claims such as Atom Log In Security, 10-second OTP sync, DMZ/Cisco wording, and blockchain data security; these require technical challenge.", "evidence": ["S2-S7 compare use cases, define problem, use Lean Six Sigma, and set objectives.", "S8-S16 show eight manual steps reduced to two, multi-agent hub, AI agent, FTA/COO parallel execution, and suggestion feature.", "S17-S21 show identity gate, security framework, governance and traceability.", "S22-S23 and S37 provide project investment and benefit model.", "S26-S36 show demo dashboard and AI agent screens."], "strengths": ["Strong execution evidence through many dashboard and AI-agent screenshots.", "Uses a process-improvement lens rather than only an AI lens: DOWNTIME waste, DMAIC, manual-step reduction.", "One of the few teams with a detailed project-cost spreadsheet and payback period.", "Identifies financial assurance, workforce efficiency, accuracy, and processing-speed benefits."], "weaknesses": ["Security language needs validation; blockchain and atom-login concepts may not map to real enterprise controls.", "Claims improved accuracy/removal of human error, but does not show test data or error-rate baseline.", "Cost model is detailed but assumptions need scrutiny: 600 batches/year, RM40/hour analyst rate, 10% assumed tariff-error amount, and RM30K productivity improvement.", "Multi-agent architecture increases attack surface and orchestration complexity; the deck does not show prompt-injection or model-isolation controls."], "rubric": {"Business Problem Clarity & Relevance": "Good: problem, waste, manual steps, and analyst burden are clearly presented (S3-S8).", "Ability to Prioritize Work Items": "Good visual comparison of the three use cases, though exact scoring logic is not deeply explained (S2).", "AI Partnership & Governance Awareness": "Moderate: governance and human oversight are present, but security architecture is not technically rigorous enough (S17-S21).", "Quantify Potential Value": "Good: detailed RM investment, benefits, and payback are shown (S22, S37). Assumptions need challenge.", "Feasibility of POC / Prototype": "Strong visual prototype evidence, but integration/security feasibility needs deeper proof (S26-S36)."}, "security": ["Biometric and 10-second OTP claims require enterprise identity integration detail; custom auth should not replace existing SSO/MFA without reason.", "Blockchain data security is not a substitute for access control, audit immutability, encryption, and retention governance.", "Multi-agent FTA/COO architecture must prevent prompt injection, data leakage between agents, and unauthorized tool use.", "DMZ architecture and third-party protocol wording should be translated into actual network flows and firewall rules."], "budget": ["Project cost is detailed: RM167K development, RM74.6K infrastructure, RM8K training, RM91.5K maintenance, total RM341.1K.", "Benefits: RM294K time savings, RM120K reduced tariff errors, RM30K productivity improvement, total RM444K.", "Need validation of 600 batches/year, RM40/hour, RM2K per-batch error reduction, 10% error assumption, and whether maintenance is annual or Year 1.", "Security monitoring/logging at RM60K is large relative to other infra and should be explained."], "questions": ["What exactly is Atom Log In Security, and why not standard enterprise SSO/MFA?", "Why is blockchain needed here, and what concrete risk does it reduce better than immutable audit storage?", "How did you validate 600 batches/year and the 10% tariff-error assumption?", "How are agents prevented from reading or writing outside their permitted tariff/COO/FTA scope?", "Which dashboard screens are functional versus static mockups?"]}, {"id": "nexa", "teamNo": 9, "name": "Nexa", "folder": "Nexa", "useCase": "Use Case 2 - AI-assisted tariff calculation automation", "intent": "Intelligent bridge layer over SAP/e2open/SAP GTS/regulatory feeds with HS classifier, FTA matcher, landed-cost calculator, audit trail, and human validation dashboard.", "execution": "Very strong content density: architecture, workflow, accountability, audit log, data boundary, TCO, threat model, trade-offs, and implementation roadmap.", "securityMaturity": "High: strongest explicit cybersecurity threat model among the decks.", "valueEvidence": "Claims RM83K monthly savings, RM18K/RM18,877 monthly operating cost, RM64K net monthly savings; based on 500 SKUs/batch and 5 batches/week at Jabil Penang site.", "majorFlag": "Budget slide has visible inconsistency: RM18K headline vs RM18,877 total monthly cost; bulk-approve thresholds need governance challenge.", "evidence": ["S2-S6 justify tariff and show integration architecture with SAP S/4HANA, e2open, SAP GTS, regulatory feed, material master, AI engine, and human dashboard.", "S10-S13 define confidence-routed HITL workflow, accountability, access controls, monitoring, retention, and immutable audit trail.", "S14 shows hybrid architecture and local/cloud data boundary.", "S15 shows TCO and savings breakdown.", "S16-S18 cover threat model, trade-offs, and phased roadmap."], "strengths": ["Best overall security depth: prompt injection, PII leakage, credential security, database/audit trail, infrastructure attack, ransomware/backup are explicitly covered.", "Strong data-governance framing: single source of truth, in-region Azure OpenAI, no external training, PII stripping, 7-year retention, official feeds.", "Clear accountability model: AI recommends, analysts decide, managers govern, organization remains accountable.", "Architecture is integrated with enterprise systems rather than presented as a standalone chatbot."], "weaknesses": ["Budget math needs cleanup and reconciliation: RM18K headline versus RM18,877 detailed total; net savings should use one consistent cost figure.", "Confidence-based bulk approval for >90% items may create automation bias unless sampling, category gates, and high-risk exclusions are strict.", "Some compliance references, such as SOX/False Claims Act, may need jurisdiction/business relevance clarification for the judging context.", "GitHub/demo-video links are present but not evaluated; slide evidence alone cannot verify the prototype."], "rubric": {"Business Problem Clarity & Relevance": "Strong: regulatory change, no live feed, error exposure, structured inefficiency, and existing-system limits are clear (S2-S5).", "Ability to Prioritize Work Items": "Strong: explains tariff versus onboarding/MES using data readiness, repeatability, HITL, and deployment feasibility (S2-S3).", "AI Partnership & Governance Awareness": "Strongest security/governance evidence among teams (S10-S17).", "Quantify Potential Value": "Strong but needs cleanup: monthly savings/cost model is detailed but inconsistent (S15).", "Feasibility of POC / Prototype": "Architecture and phased roadmap are strong; external repo/video not evaluated (S6-S18)."}, "security": ["Good mitigation list for prompt injection, PII leaks, API keys, database audit, infrastructure attacks, and backups.", "Need proof that stripping product descriptions does not remove classification-critical context.", "Azure OpenAI/in-region claims should be mapped to tenancy, logging, retention, and no-training settings.", "Bulk approval thresholds must include prohibited categories, sanctions, random audits, and forced human review for new categories."], "budget": ["Headline monthly operating cost RM18K conflicts with detailed RM18,877 total; the report should ask for one reconciled model.", "Savings include RM40K analyst time, RM15K error exposure, RM8K reclassification avoided, RM20K FCA penalty risk avoided.", "Risk-weighted savings require actual probability assumptions, incident history, and impact distributions.", "The architecture includes many services but detailed cloud/security costs seem low; validate with procurement/cloud estimates."], "questions": ["Please reconcile RM18K, RM18,877, and RM64K net monthly savings using one formula.", "What categories are excluded from bulk approval even if confidence is above 90%?", "How do you defend against supplier-PDF prompt injection before OCR text reaches the model?", "Which data fields are stripped before Azure OpenAI, and who verifies that classification accuracy remains acceptable?", "What evidence supports the RM20K/month penalty-risk avoided assumption?"]}, {"id": "4ce", "teamNo": 10, "name": "4-CE", "folder": "4-CE", "useCase": "Use Case 3 - AI-governed SDLC acceleration for MES modernization", "intent": "MES SDLC copilot concept intended to improve revenue, delivery speed, requirement clarity, code/test generation, and workforce productivity.", "execution": "Very short concept deck with workflow and wireframe; the rendered wireframe appears mostly blank.", "securityMaturity": "Low: security/governance for AI-assisted development is mostly absent.", "valueEvidence": "Qualitative revenue/productivity claims only; no budget or measurable ROI.", "majorFlag": "Underdeveloped for the official rubric: no quantification, no security design, no clear POC execution plan, and minimal workflow detail.", "evidence": ["S3 selects Use Case 3 and frames it as revenue driver, productivity/cost improvement, and workforce uplift.", "S4 rejects tariff due legal/cyber/regulatory risk and onboarding due lower impact/ROI.", "S5 has current/solution workflow diagrams.", "S6 shows a concept demo URL frame, but rendered content is mostly blank."], "strengths": ["Clear stance on Use Case 3 and a direct attempt to compare against the other options.", "Good business instinct in connecting SDLC acceleration to product delivery and revenue, not only cost savings.", "Acknowledges tariff has legal, cybersecurity, and explainability constraints."], "weaknesses": ["Deck is too short to substantiate the solution.", "No AI governance model, human approval point, audit trail, or secure SDLC controls are described.", "No quantification of revenue lift, cycle-time reduction, defect reduction, budget, payback, or implementation effort.", "Wireframe/prototype evidence is weak because the rendered concept-demo slide is largely blank."], "rubric": {"Business Problem Clarity & Relevance": "Moderate: chooses MES/SDLC but does not fully restate the case problem or affected stakeholders (S3-S4).", "Ability to Prioritize Work Items": "Some comparison exists, but it is mostly qualitative and one-sided (S4).", "AI Partnership & Governance Awareness": "Weak: no HITL, monitoring, access, audit, or model-risk controls are materially described.", "Quantify Potential Value": "Weak: value is qualitative only (S3).", "Feasibility of POC / Prototype": "Weak: workflow and blank-looking wireframe are insufficient for execution confidence (S5-S6)."}, "security": ["AI code/test generation requires secure SDLC gates that are not shown.", "No access-control model for source code, requirements, prompts, test artifacts, or production deployment.", "No audit trail for AI-generated code, reviewer approval, model version, or release decision.", "No discussion of hallucinated code, insecure dependencies, secret leakage, or IP exposure."], "budget": ["No project budget or operating cost.", "No ROI calculation for revenue, delivery speed, defect reduction, or SQA effort.", "Judges should request a minimum business case before accepting revenue driver as evidence."], "questions": ["Where exactly does human approval occur before code/test artifacts affect MES?", "What security gates stop AI-generated insecure code from merging?", "What metric proves revenue or delivery value: PBI cycle time, release frequency, defect leakage, or customer impact?", "What is the POC scope for a first sprint?", "Why is the concept-demo slide blank or not showing functional evidence?"]}, {"id": "hoppers", "teamNo": 11, "name": "Hoppers", "folder": "Hoppers", "useCase": "Use Case 1 - IT Co-Pilot onboarding with RAG architecture", "intent": "Microsoft Teams-based IT Co-Pilot delivering task-level, cited onboarding guidance from verified documents with SME verification.", "execution": "Clean concept deck with UI, GitHub/prototype links listed but not evaluated.", "securityMaturity": "Medium with one critical red flag: the deck claims the source repository contains full environment variables.", "valueEvidence": "Claims 78% improvement in time-to-productivity; no formula, cost, or budget.", "majorFlag": "Critical security concern: source code contains full environment variables in the repository note. Even without opening the link, that statement is a major secret-management red flag.", "evidence": ["S3-S5 define onboarding time-to-productivity, disconnected systems, undocumented wisdom, dependency risk, and 30% workday lost to search.", "S6-S9 define RAG processing, Teams interface, source transparency, safe boundaries, zero-password policy, and monitoring.", "S10 claims 78% TTP improvement.", "S11 lists residual risks and app boundaries.", "S12 lists source repository/prototype links and says source code contains full environment variables, permission validation logic, and Teams bot configuration scripts."], "strengths": ["Good user-centric framing: places the assistant in Teams, where new hires already work.", "RAG pattern is relevant for onboarding and includes citations/source transparency.", "Recognizes that AI cannot fix bad documentation and must not provision infrastructure access or modify firewalls.", "SME verification loop and out-of-bounds blocking are appropriate governance concepts."], "weaknesses": ["The environment-variable repository statement is a serious security governance issue.", "No budget, support model, token/model cost, source curation cost, or adoption plan.", "78% TTP improvement lacks formula, baseline cohort, measurement window, and confidence level.", "Security controls are described at slogan level: zero-password policy, safe boundaries, and 24/7 monitoring need technical implementation detail."], "rubric": {"Business Problem Clarity & Relevance": "Strong: onboarding fragmentation and productivity loss are clearly tied to the case brief (S3-S5).", "Ability to Prioritize Work Items": "Weak/moderate: focuses on Use Case 1 but gives little structured comparison to tariff/MES.", "AI Partnership & Governance Awareness": "Good concepts but weakened by the environment-variable red flag (S6-S12).", "Quantify Potential Value": "Weak: 78% improvement is not explained and no budget is provided (S10).", "Feasibility of POC / Prototype": "Prototype/repo links are listed but not evaluated; the in-slide UI is plausible (S7-S12)."}, "security": ["Do not expose environment variables in source repositories. Ask whether any secrets, tokens, connection strings, tenant IDs, bot credentials, or API keys are present.", "Teams bot permissions require tenant consent, least privilege, secret rotation, and app registration governance.", "Zero-password policy should be implemented through source filtering and credential redaction, not just response blocking.", "RAG must enforce source permissions per user and keep audit logs of query, retrieved chunks, and answer citations."], "budget": ["No first-year build or run budget.", "No estimate for Teams bot hosting, vector store, model usage, monitoring, security review, or SME source validation.", "TTP improvement needs conversion into saved days/hours and workforce value."], "questions": ["Does the repository contain real environment variables or only templates/placeholders?", "How are Teams bot credentials stored, rotated, and permissioned?", "How is zero password enforced if a source document contains a password?", "What is the formula behind 78% TTP improvement?", "Who owns document verification and SME escalation after rollout?"]}]</script>
+<script id="report-enrichment" type="application/json">{
+  "tnt2": {
+    "strongEvidence": [
+      "S3 gives the strongest evidence for governance maturity: it explicitly contrasts traditional chatbot weaknesses (open access, no review, hallucination, no classification) with permission-aware retrieval, gap detection, data classification, RAG grounding, and human review.",
+      "S12 shows a retrieval decision path with source score components: relevance 60%, coverage 25%, governance 15%, then a grounding check before safe reply/draft review. That is a stronger control than simply saying \"RAG\".",
+      "S16 names concrete risk categories: unauthorized access, AI hallucination, outdated knowledge retrieval, knowledge gaps, low adoption, and confidential leakage. This supports security awareness, but not yet full control design.",
+      "S17 separates current controls from planned controls: identity/RBAC, classification/permission-aware RAG, and review/approval are current; secure ingestion/encryption plus audit logs/DLP appear planned. This is useful evidence and also a readiness gap.",
+      "S13-S15 provide operational ROI numbers: 660 new-hire search hours saved plus 840 SME support hours saved, totaling 1,500 hours/year. The evidence is quantifiable but the slide also contains a 600 vs 660 inconsistency that needs challenge."
+    ],
+    "challengePoints": [
+      "The ROI total appears inconsistent: S13 shows 660 hours saved for new hires, S14 uses \"600 + 840 = 1500\" even though 660 + 840 = 1500. If the arithmetic is presentation-level, challenge the underlying model.",
+      "The deck says permission-aware RAG, but does not prove whether permissions are enforced before indexing, at retrieval time, at answer generation, or all three. This is a common source of confidential-data leakage.",
+      "The security framework labels platform protection and detection/response as planned. That means the POC should not be treated as enterprise-ready for confidential onboarding content.",
+      "The team chose onboarding as the best risk/impact balance, but did not quantify why tariff or MES should lose under the official value/risk/feasibility trade-off."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "A new hire asks the assistant for an admin-only SOP using harmless wording that is semantically close to public onboarding content. What is the BEST design control?",
+        "options": ["A. Filter the final answer for sensitive keywords.", "B. Enforce document-level ACLs before retrieval and again before response generation.", "C. Send low-confidence answers to a human reviewer.", "D. Add a disclaimer that the AI may be wrong."],
+        "listenFor": "All help somewhat, but B is strongest because confidentiality must be enforced before the model sees or uses unauthorized chunks."
+      },
+      {
+        "scenario": "The team can only implement one control before a pilot with real SharePoint data. What should come FIRST?",
+        "options": ["A. A dashboard showing adoption KPIs.", "B. A prompt template that asks the model to cite sources.", "C. Permission-synchronized indexing and retrieval tied to the user identity.", "D. Quarterly SME review of stale documents."],
+        "listenFor": "All are useful; C is the security gate that prevents unauthorized disclosure during the pilot."
+      }
+    ]
+  },
+  "o1": {
+    "strongEvidence": [
+      "S1 and S6 repeatedly establish the core governance model: AI recommends with evidence, deterministic services calculate, and analysts retain the final decision.",
+      "S11 is important supporting evidence: duty, COO, FTA treatment, landed cost, and intermediate values remain in backend deterministic services because they have legal and financial implications.",
+      "S12-S20 show current prototype screens: AI review, shipment evidence, tariff suggestion, compliance evaluation, upload, knowledge stores, final report, audit report, RBAC login, and dashboard. This is stronger execution evidence than a pure concept flow.",
+      "S21 explicitly labels the 98% time reduction, 75% interaction reduction, and USD 2,000 exposure reduction as case-study targets, not validated prototype results. That honesty improves credibility.",
+      "S22-S23 define a validation method: 50 shipment cases, SME reference answers, A/B manual vs Co-Pilot review, and metrics for time, actions, duty accuracy, evidence gaps, analyst acceptance, and audit completeness."
+    ],
+    "challengePoints": [
+      "The deck is strong on validation method but weak on cost. Without cloud/model/storage/security/SME validation cost, value cannot be judged against investment.",
+      "The future-state roadmap introduces agentic workflow orchestration. That could change operational behavior, so ask who approves workflow changes and how they are tested before release.",
+      "RBAC login is shown, but role privileges and approval delegation are not defined. A login screen is not the same as least-privilege authorization.",
+      "The proposal depends heavily on source quality and approved tariff/FTA sources, but long-term source ownership is not costed."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "During pilot testing, the AI explanation is well written, but the deterministic duty calculator and the retrieved source disagree. What is the BEST action?",
+        "options": ["A. Trust the deterministic calculator because it is rule-based.", "B. Trust the AI explanation because it considered more context.", "C. Block approval, preserve evidence, and escalate to a trade SME for source/rule resolution.", "D. Let the analyst override and move on to avoid delaying the shipment."],
+        "listenFor": "All may be tempting; C is best because regulated decisions need explainable resolution, not silent override."
+      },
+      {
+        "scenario": "Leadership asks to skip the controlled pilot because screenshots look mature. What is the MOST defensible response?",
+        "options": ["A. Approve limited live use for low-risk shipments only.", "B. Run the proposed A/B benchmark against SME reference answers before production use.", "C. Add a stronger disclaimer to all AI outputs.", "D. Require analysts to review every result manually forever."],
+        "listenFor": "All reduce some risk; B best matches their own evidence and provides measurable assurance before scale."
+      }
+    ]
+  },
+  "mind": {
+    "strongEvidence": [
+      "S3-S5 provide clear problem evidence: global IT knowledge is scattered across SharePoint, SOP repositories, emails, and training materials, creating slow retrieval and senior-staff dependency.",
+      "S7-S10 show the team tried to classify where AI supports, where human judgment remains mandatory, how incorrect outputs are handled, and how accountability is maintained.",
+      "S11 names private RAG, secure vector database, RBAC, and audit trail. These are relevant security controls, but the implementation detail is thin.",
+      "S12-S14 provide measurable claims: ramp-up time cut by 50%, 5-8 hours/week senior time recovery, and 40% ticket deflection.",
+      "S15-S19 show UI mockups for staff login, onboarding, smart search, IT support, and admin dashboard, supporting a plausible front-end workflow."
+    ],
+    "challengePoints": [
+      "The deck does not materially justify why Use Case 1 is the best priority over tariff or MES; this is a direct gap against the 20% prioritization criterion.",
+      "The 50% ramp-up and 40% ticket-deflection claims have no formula, sample size, baseline cohort, or measurement period.",
+      "GDPR/SOC2 language appears generic. Challenge whether those are actually the right compliance anchors for Jabil onboarding data in this context.",
+      "The team says secure vector DB, but not how source permissions, embeddings, deleted documents, or stale chunks are handled."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "A senior engineer says the assistant gave a correct answer from an outdated SOP. What should be fixed FIRST?",
+        "options": ["A. Ask users to rate every answer.", "B. Add source freshness and effective-date validation to retrieval.", "C. Fine-tune the model on all SOPs.", "D. Require a human to approve every answer."],
+        "listenFor": "All could help; B addresses the root cause without making the system unusable."
+      },
+      {
+        "scenario": "The POC must handle VPN/password/access questions. Which control is MOST important before pilot?",
+        "options": ["A. Strong answer citations.", "B. Identity verification and least-privilege action boundaries.", "C. A friendly Teams user experience.", "D. A dashboard showing ticket deflection."],
+        "listenFor": "All are valuable; B is the security-critical control for access-related content."
+      }
+    ]
+  },
+  "girls": {
+    "strongEvidence": [
+      "S11-S15 provide the clearest value model among many decks: 12.5 hours to 15 minutes, 8 steps to 2 steps, $2,500 exposure to <$500, $2,429 benefit per batch, $873K annual benefits, $90K investment, and <4-month payback.",
+      "S12 shows an explicit formula: benefit per batch = labor saved + risk avoided = (12.25 hrs x $35/hr) + $2,000.",
+      "S16 gives strong governance evidence: confidential classification, AES-256/TLS 1.3, private cloud, RBAC, MFA, least privilege, source attribution, 7-year retention, human override, analyst sign-off, escalation path, and quarterly model review.",
+      "S17 is a useful credibility slide because it states what the system does not solve: missing supplier data, overnight policy changes, LLM token costs, sanctions/legal disputes, and high-risk ambiguous categories.",
+      "S18 states every classification goes through human review and the approval step cannot be bypassed."
+    ],
+    "challengePoints": [
+      "The $873K benefit depends mostly on risk avoided. Ask for actual error probability, batch volume, and historical exposure, not just case-study exposure.",
+      "The slide uses a market-rate analyst cost. Internal loaded cost, regional cost, and opportunity cost may differ materially.",
+      "Quarterly model review may be too slow for urgent tariff or sanctions updates unless there is event-driven review.",
+      "The $90K investment is not decomposed into integration, security review, model cost, audit storage, SME validation, and ongoing support."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "The model has 95% confidence, the analyst is busy, and the shipment is low value. What is the BEST control decision?",
+        "options": ["A. Allow auto-approval because confidence is high.", "B. Require analyst approval but allow batch review for low-risk green items.", "C. Block all AI recommendations until perfect accuracy is proven.", "D. Let the system submit but log the decision for audit."],
+        "listenFor": "All sound operationally useful; B best preserves human accountability while still enabling efficiency."
+      },
+      {
+        "scenario": "A tariff rule changes overnight after the quarterly model review. What is the MOST important missing control?",
+        "options": ["A. More frequent user training.", "B. Event-driven regulatory-source update and revalidation workflow.", "C. Stronger encryption at rest.", "D. A clearer ROI dashboard."],
+        "listenFor": "All may matter; B addresses the compliance failure mode directly."
+      }
+    ]
+  },
+  "apex": {
+    "strongEvidence": [
+      "S2 establishes a strong case baseline: PBIs take up to 2 sprints, each stable release has 50+ defects, each defect can take a sprint to fix, and 20 SQAs spend 1 month on regression.",
+      "S4-S9 show a coherent AI-human workflow: requirements analyzer, secure code copilot, automated test generator, governance gateway, and human sign-off before release.",
+      "S9 states no AI output goes live without human sign-off and every approval is logged with who approved what and when.",
+      "S10 provides measurable target outcomes: PBI cycle time from ~2 sprints to ~1 sprint, defects from 50+ to <10, SQA effort reduction around 70%, and defects caught pre-merge.",
+      "S11-S12 include security/governance controls: RBAC, audit trail, human override, no auto-deploy, pilot modules, training, private deployment, and RBAC."
+    ],
+    "challengePoints": [
+      "The revenue-driver claim is not proven. Faster delivery can create revenue only if linked to billable work, release value, customer commitment, or avoided downtime.",
+      "The 7-week rollout to full SDLC integration across sites is aggressive for MES, QA, CI/CD, security review, and governance adoption.",
+      "Secure Code Copilot lacks concrete secure SDLC controls: SAST, dependency/license scanning, secret scanning, code provenance, prompt leakage, and approval gates.",
+      "AI-generated tests can reproduce bad requirements; independent validation is needed or the test generator may create false confidence."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "The AI generates code and matching tests for a vague PBI, and all tests pass. What should happen BEFORE merge?",
+        "options": ["A. Merge because test coverage exists.", "B. Require requirement clarification plus secure code review and independent test validation.", "C. Let a senior engineer approve based on experience.", "D. Deploy behind a feature flag and monitor defects."],
+        "listenFor": "All can be part of delivery; B is best because passing AI-generated tests is not sufficient assurance."
+      },
+      {
+        "scenario": "Leadership wants the fastest route to value in 7 weeks. Which scope is MOST defensible?",
+        "options": ["A. Full SDLC integration across all MES teams.", "B. One low-risk module with measured PBI clarity, code review findings, and regression-test quality.", "C. Code-generation only because it is easiest to demo.", "D. Test-generation only because it avoids production code risk."],
+        "listenFor": "All have merit; B gives measurable value while controlling blast radius."
+      }
+    ]
+  },
+  "suchaiirmon": {
+    "strongEvidence": [
+      "S5 provides concrete stack evidence: pdfplumber, EasyOCR, ChromaDB, web crawler, Gemini reasoning, financial calculation engine, PySide6 dashboard, and SAP-compatible Excel export.",
+      "S3-S4 clearly describe tariff pain: millions of transactions, changing regulations, 12.5-hour baseline workflow, $2,500 exposure per batch, manual searches, and fragmented regulatory knowledge.",
+      "S8 shows the workflow from document extraction to ChromaDB, web crawling, RAG, generation, confidence scores, and reasoning traces.",
+      "S9 explains a security design choice: PySide6 desktop app with backend databases behind Jabil intranet, plus analyst/admin role separation.",
+      "S12-S13 state residual risks and boundaries: does not replace legal accountability, cannot guarantee perfect classification, cannot compensate for bad data, and AI should not be used for legal interpretation or disagreement resolution."
+    ],
+    "challengePoints": [
+      "Web crawling official trade sources is risky without allow-listing, integrity checks, source approval, effective dates, and rollback. A poisoned or stale source can create compliance exposure.",
+      "Using Gemini is named, but the data boundary is not. Ask exactly what trade/financial/supplier data leaves Jabil and what is redacted.",
+      "PySide6 avoiding web attacks does not eliminate endpoint, malware, credential-storage, update-signing, or local data-exfiltration risk.",
+      "Benefit claims use the same 98% / 75% / $2,000 figures as the case pattern, but no validation method or cost model is shown."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "The crawler finds a newer tariff page that conflicts with the approved internal rule base. What is the BEST system behavior?",
+        "options": ["A. Use the newest crawled page automatically.", "B. Keep the approved rule active, flag the conflict, and require compliance-owner approval before changing calculations.", "C. Ask Gemini to decide which source is more credible.", "D. Let analysts choose either source case-by-case."],
+        "listenFor": "All may seem practical; B preserves change control and auditability."
+      },
+      {
+        "scenario": "A supplier PDF contains hidden prompt text telling the model to classify the item under a lower-duty code. What control matters MOST?",
+        "options": ["A. OCR/document sanitization before model input.", "B. Analyst training on supplier-document risks.", "C. Provenance and confidence display that flags untrusted documents.", "D. Restrict the crawler to approved source domains."],
+        "listenFor": "All reduce some risk; A is strongest because the malicious instruction must be removed or neutralized before the model sees it."
+      }
+    ]
+  },
+  "4real": {
+    "strongEvidence": [
+      "S2-S5 create a strong business story: a trade analyst has 50 shipments, 6 systems, and fragmented knowledge across ERP, Excel/PDF, supplier declarations, BOMs, COO certificates, and FTA regulations.",
+      "S4 compares use cases using speed to value, data readiness, measurability, implementation risk, and AI appropriateness.",
+      "S6 shows the process simplification claim: 8 manual steps reduced to 2 process gates: automated ingestion and strategic sign-off.",
+      "S9-S11 provide bold quantified claims: 98% process efficiency, $16M annual savings based on 8,000 batches, 98K hours returned, 12.5 hours to 15 minutes, and 100,000 legacy hours vs 2,000 TRACE-enabled hours.",
+      "S13-S14 show a 3-phase roadmap and implementation risks: change management, site infrastructure, data quality, regulatory updates, and update ownership."
+    ],
+    "challengePoints": [
+      "$16M annual savings with only ~$1,100 fixed monthly regional infrastructure cost appears under-costed for enterprise integration, security, validation, support, and governance.",
+      "\"15 minutes autonomous\" conflicts with the regulated need for analyst sign-off. Challenge whether the human is still a meaningful decision maker.",
+      "WORM audit logs are claimed, but the storage, immutability mechanism, retention, and admin-delete controls are not defined.",
+      "The $0.005/batch OpenAI cost is likely too narrow unless it includes prompt size, retrieval, retries, document processing, audit storage, and monitoring."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "The system completes a batch in 15 minutes, but the analyst has not reviewed the evidence. What is the BEST interpretation of readiness?",
+        "options": ["A. Ready, because the speed target was met.", "B. Not ready for regulated submission until analyst approval and audit evidence are complete.", "C. Ready only for shipments below a value threshold.", "D. Ready if the AI confidence score is above 95%."],
+        "listenFor": "All have operational appeal; B is best for compliance accountability."
+      },
+      {
+        "scenario": "A judge must challenge the $16M savings claim. Which question is MOST important?",
+        "options": ["A. Whether the $16M includes only analyst labor savings.", "B. What are the batch volume, labor rate, error probability, exposure value, and included cost categories?", "C. Which AI model and operating-cost assumptions were used.", "D. Whether the savings are annualized, one-time, or risk-weighted."],
+        "listenFor": "All are valid budget questions; B is strongest because it tests the full value model instead of one slice."
+      }
+    ]
+  },
+  "uo": {
+    "strongEvidence": [
+      "S2-S7 frame the choice through case comparison, problem statement, Lean Six Sigma DMAIC, DOWNTIME waste, and objectives: 12.5h to <15m, 75% operational efficiency improvement, >85% accuracy, and <$500 financial risk.",
+      "S8-S16 show concrete workflow/prototype evidence: eight manual system steps, AI-agent-assisted steps, two analyst steps, multi-agent hub, demo AI agent, FTA/COO parallel execution, and suggestion feature.",
+      "S17-S21 include identity gate, security framework, governance, exception management, human oversight, explainability, and traceability.",
+      "S22 and S37 provide the most detailed cost spreadsheet among teams: RM167K development, RM74.6K infrastructure, RM8K training, RM91.5K maintenance, RM341.1K Year 1 investment, RM444K annual benefits, and ~9.2-month payback.",
+      "S26-S36 show repeated dashboard and AI-agent screens, which supports POC effort even if functionality was not externally verified."
+    ],
+    "challengePoints": [
+      "\"Atom Log In Security,\" 10-second OTP sync, DMZ/Cisco wording, and blockchain data security are not standard enough to accept without explanation. They may be buzzwords rather than controls.",
+      "Blockchain does not automatically solve data integrity, auditability, access control, or compliance. Ask what specific threat it mitigates better than immutable audit logs.",
+      "The cost model depends on 600 batches/year, RM40/hour analyst rate, RM2,000 per-batch error reduction, and 10% assumed error amount. These assumptions need evidence.",
+      "Multi-agent architecture increases attack surface; the deck does not explain prompt-injection isolation, tool permissioning, or agent-to-agent data boundaries."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "The team proposes blockchain to secure shipment records. What is the BEST judge response?",
+        "options": ["A. Accept it if the team can prove immutability, key control, and participant trust.", "B. Ask what exact threat blockchain mitigates and compare it with append-only audit logging plus access control.", "C. Treat blockchain as sufficient only after source-system integrity and identity controls are proven.", "D. Ask whether blockchain records can be reconciled to the ERP source of truth."],
+        "listenFor": "All are reasonable review angles; B is best because it starts with threat model fit before accepting architectural complexity."
+      },
+      {
+        "scenario": "The multi-agent system has separate FTA and COO agents. What control should be prioritized FIRST?",
+        "options": ["A. Agent-specific least privilege and tool boundaries.", "B. Shared audit logging across every agent decision and tool call.", "C. Lower model temperature for more consistent agent output.", "D. Human approval before any tariff or ERP-affecting submission."],
+        "listenFor": "All can be part of the control stack; A is first because every agent must be constrained before it can safely act."
+      }
+    ]
+  },
+  "nexa": {
+    "strongEvidence": [
+      "S6 shows a strong enterprise architecture: SAP S/4HANA, e2open GTM, SAP GTS, regulatory feed, material master, HS classifier, FTA matcher, landed-cost calculator, audit trail, and human validation dashboard.",
+      "S10-S13 provide strong governance evidence: confidence-routed workflow, AI cannot approve, trade analyst validates, manager oversees, organization remains accountable, immutable audit log, regulatory data version, model version, analyst ID/action, override reason, and SAP write-back reference.",
+      "S12-S14 detail data boundaries: RBAC inherited from SAP, OAuth 2.0, TLS 1.3, AES-256, Key Vault rotation, read-only SAP/e2open perimeter, official feeds, in-region Azure OpenAI, no external training, PII stripped, and local deterministic engines.",
+      "S15 provides a detailed TCO/savings breakdown: RM83K monthly savings, RM18K/RM18,877 monthly cost, RM64K net monthly savings, and components for inference, hosting, audit trail, identity/security, analyst time, error exposure, reclassification, and penalty risk.",
+      "S16 is the strongest threat-model slide: prompt injection, PII leakage, API key exposure, database/audit breach, infrastructure attack, and ransomware/backup."
+    ],
+    "challengePoints": [
+      "Budget math is visibly inconsistent: RM18K headline monthly operating cost versus RM18,877 detailed total. The model must reconcile this before judging ROI strength.",
+      "Bulk approval above 90% confidence can create automation bias. Ask which categories are excluded and how random audits are enforced.",
+      "Stripping product descriptions for privacy may reduce classification accuracy. The team needs to prove privacy controls do not remove legally relevant details.",
+      "SOX/False Claims Act references may be valid in some contexts but need relevance to Jabil's actual trade lanes and jurisdictions."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "A shipment receives 96% confidence, but it is in a newly changing tariff category. What is the BEST handling?",
+        "options": ["A. Bulk approve because confidence is above 90%.", "B. Force manual review because category/regulatory change overrides confidence.", "C. Let the manager approve without analyst review.", "D. Submit and rely on the audit log if challenged."],
+        "listenFor": "All use parts of their model; B best recognizes risk-based override of confidence."
+      },
+      {
+        "scenario": "PII stripping removes supplier and pricing details before Azure OpenAI. Classification accuracy drops. What is the BEST next step?",
+        "options": ["A. Send all raw fields to the model.", "B. Use local deterministic/rule engines for sensitive fields and only send minimum necessary non-sensitive context.", "C. Disable privacy filtering for high-value shipments.", "D. Ask analysts to manually fix all low-confidence outputs."],
+        "listenFor": "All may solve part of the issue; B balances confidentiality and classification quality."
+      }
+    ]
+  },
+  "4ce": {
+    "strongEvidence": [
+      "S3 is the main business evidence: Use Case 3 is framed as a revenue driver, faster delivery path, higher market value, productivity/cost improvement, and workforce uplift.",
+      "S4 attempts trade-off reasoning by rejecting tariff as cost-only/high-stakes and onboarding as lower impact/slow payback.",
+      "S5 has current vs solution workflow diagrams, indicating at least a process-level concept.",
+      "S6 presents a concept demo frame, but the rendered slide appears mostly blank, so prototype evidence is weak.",
+      "There is no material slide evidence for AI governance, security architecture, budget, measurable ROI, or implementation timeline."
+    ],
+    "challengePoints": [
+      "The revenue-driver claim does not make sense without numbers: no release frequency, cycle-time improvement, customer impact, defect reduction, or revenue conversion is shown.",
+      "They reject tariff partly because it has cybersecurity and explainability risk, but do not address the same level of risk for AI-generated MES code.",
+      "The deck has only seven slides and no meaningful security/governance design, which is a major gap against the 25% AI partnership/governance criterion.",
+      "A mostly blank concept-demo slide should not be treated as prototype evidence."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "The team argues Use Case 3 creates revenue, but has no ROI model. What is the BEST follow-up?",
+        "options": ["A. Ask for the exact metric linking SDLC speed to revenue or avoided cost.", "B. Accept a directional claim if they can show historical release-delay cost.", "C. Ask for a working PBI-to-test prototype to support the value claim.", "D. Challenge security first because MES changes can create production risk."],
+        "listenFor": "All are relevant; A is best for scoring the value claim because revenue impact needs a measurable linkage."
+      },
+      {
+        "scenario": "AI-generated code is proposed for MES modernization. Which missing control is MOST critical?",
+        "options": ["A. Human code review plus SAST/secret/dependency scanning before merge.", "B. A chatbot-style explanation of the generated code for reviewer context.", "C. Restrict the pilot to non-production branches and low-risk modules.", "D. Document developer accountability for accepting AI-generated code."],
+        "listenFor": "All help governance; A is the necessary secure SDLC gate before generated code can be merged."
+      }
+    ]
+  },
+  "hoppers": {
+    "strongEvidence": [
+      "S3-S5 provide strong problem evidence for Use Case 1: time-to-productivity gaps, disconnected Workday/SharePoint/SOP/email sources, undocumented site-specific wisdom, senior-staff dependency, and 30% workday lost to searching.",
+      "S6-S8 describe a credible RAG onboarding workflow: query hub, verified document vectorization, source transparency, human verification, ingest/resolve/validate/scale.",
+      "S9 adds governance concepts: zero-password policy, traceable answers, safe boundaries, and 24/7 outlier monitoring.",
+      "S10 claims a projected 78% improvement in time-to-productivity, but no formula is shown.",
+      "S12 is critical evidence: the slide says the source code contains full environment variables, permission validation logic, and Teams bot configuration scripts. This was not externally checked, but the statement itself is a security red flag."
+    ],
+    "challengePoints": [
+      "The phrase \"source code contains full environment variables\" is a serious secret-management concern. If it means real secrets, tokens, tenant IDs, bot credentials, or connection strings, it is a major security failure.",
+      "Zero-password policy is not enough if passwords or secrets exist in source documents or environment files. Prevention must happen at ingestion and repository hygiene, not only in response generation.",
+      "78% TTP improvement has no baseline cohort, formula, or measurement period.",
+      "The deck does not give a structured prioritization case against tariff and MES, so it is weaker on the 20% prioritization criterion."
+    ],
+    "scenarioQuestions": [
+      {
+        "scenario": "A team says their repository contains full environment variables for stakeholder review. What is the BEST judge response?",
+        "options": ["A. Ask whether they are templates/placeholders and require proof no secrets are exposed.", "B. Accept repository transparency only if secret-scanning and rotation evidence exists.", "C. Treat it as a governance risk until the repo history is inspected.", "D. Ask whether credentials were moved out of source control before judging."],
+        "listenFor": "All are reasonable follow-ups; A is the best first response because it verifies whether actual secrets were exposed."
+      },
+      {
+        "scenario": "The Teams bot can answer task-level onboarding questions from SOPs. Which risk should be handled FIRST?",
+        "options": ["A. Whether the Teams bot is usable enough for new hires to adopt.", "B. Whether source permissions and secrets are enforced before retrieval and answer generation.", "C. Whether the projected TTP improvement has a defensible baseline and measurement window.", "D. Whether latency is low enough for task-level onboarding support."],
+        "listenFor": "All matter to product success; B is the security-critical first-order issue before usability and ROI claims can be trusted."
+      }
+    ]
+  }
+}</script>
+<script>
+const teams = JSON.parse(document.getElementById('report-data').textContent);
+const enrichments = JSON.parse(document.getElementById('report-enrichment').textContent);
+teams.forEach(t => Object.assign(t, enrichments[t.id] || {}));
+const atlasByTeam = {
+  tnt2: [
+    "LLM Prompt Injection / LLM Data Leakage (AML.T0051, AML.T0057): S3, S12, S16, and S17 show permission-aware RAG, grounding, unauthorized-access risk, and confidential-leakage risk. Strong question: prove ACL enforcement before indexing, at retrieval, and before answer generation.",
+    "Data from Information Repositories (AML.T0036): the solution depends on enterprise knowledge repositories. Ask how stale, misclassified, or over-permissioned documents are detected before they become retrievable chunks.",
+    "Cost Harvesting (AML.T0034): the deck quantifies 1,500 hours/year but gives no model-use budget, rate limits, quota alerts, or abuse throttling. Ask what stops high-volume onboarding queries from turning into unbounded run cost."
+  ],
+  o1: [
+    "LLM Prompt Injection (AML.T0051): S12-S20 show uploads, knowledge stores, and AI review screens; S22-S25 acknowledge incorrect retrieval and governance gates. Ask how uploaded trade documents are sanitized before retrieval and summarization.",
+    "AI Agent Tool Invocation / Exfiltration via AI Agent Tool Invocation (AML.T0053, AML.T0086): the future agentic roadmap can create tool-action risk even though S6-S11 wisely separate deterministic calculations from AI explanations. Ask which tools are read-only, which can write, and who approves each action.",
+    "LLM Data Leakage (AML.T0057): RBAC and evidence grounding are strong, but the deck does not prove prompt logs, source snippets, and approved reports are retention-limited, access-controlled, and tamper-resistant."
+  ],
+  mind: [
+    "LLM Data Leakage (AML.T0057): S11 names private RAG, secure vector DB, RBAC, and audit trail, but does not show permission inheritance. Ask whether confidential IT, VPN, password-reset, or access-process content can leak through semantic retrieval.",
+    "Unsecured Credentials (AML.T0055): onboarding/helpdesk repositories often contain scripts, temporary passwords, connection strings, or screenshots. Ask how secrets are detected and removed before indexing.",
+    "Cost Harvesting (AML.T0034): S12-S14 claim ramp-up and ticket-deflection value but there is no token, vector DB, monitoring, or quota budget. Ask for monthly run-cost guardrails and abuse throttling."
+  ],
+  girls: [
+    "LLM Prompt Injection / LLM Data Leakage (AML.T0051, AML.T0057): S16-S18 show strong private-cloud, RBAC/MFA, source attribution, retention, override, sign-off, and escalation controls. The hard test is whether malicious supplier PDFs or tariff notes can alter model behavior or expose restricted data.",
+    "AI Agent Tool Invocation (AML.T0053): ERP/API access must be least privilege and non-mutating unless a licensed analyst approves. Ask whether AITradeX can write back, approve, or only recommend.",
+    "Cost Harvesting (AML.T0034): token-cost monitoring is acknowledged, but the ROI model does not include model/fan-out/retry cost. Ask how they cap spend during batch spikes or malformed document retries."
+  ],
+  apex: [
+    "AI Supply Chain Compromise / Malicious Package (AML.T0010, AML.T0011.001): S4-S9 introduce secure code copilot and test generation. Ask for dependency provenance, package allow-listing, license checks, SAST/DAST, and secret scanning before any generated code merges.",
+    "Unsecured Credentials / LLM Data Leakage (AML.T0055, AML.T0057): MES source code, requirements, logs, and prompts may expose IP or credentials. Ask what source-code context the model can see and where prompts/responses are stored.",
+    "AI Agent Tool Invocation (AML.T0053): S11 says no auto-deploy, which is good. Ask whether the copilot can open PRs, run CI, change tests, or update tickets, and which actions require human approval."
+  ],
+  suchaiirmon: [
+    "LLM Prompt Injection (AML.T0051): S5 names a web crawler, ChromaDB, Gemini, OCR/PDF parsing, and financial calculation. This is a high-risk untrusted-input pipeline; ask how official sources are allow-listed, signed, dated, and approved before use.",
+    "LLM Data Leakage (AML.T0057): the deck does not clearly state what trade data is sent to Gemini. Ask for the exact fields, redaction rules, retention settings, and whether production data ever leaves Jabil control.",
+    "AI Supply Chain Compromise (AML.T0010): pdfplumber, EasyOCR, ChromaDB, crawlers, desktop packaging, and model dependencies create supply-chain risk. Ask how packages and desktop updates are signed and validated."
+  ],
+  "4real": [
+    "LLM Prompt Injection (AML.T0051): S6 reduces tariff work to automated ingestion plus sign-off, but supplier declarations and PDFs can carry malicious instructions. Ask how ingestion strips instructions before they reach the model.",
+    "AI Agent Tool Invocation (AML.T0053): the phrase 15 minutes autonomous conflicts with analyst sign-off. Ask what the system can do without a human: classify, calculate, write records, notify suppliers, or only draft a recommendation.",
+    "Cost Harvesting (AML.T0034): S9-S12 claim very large savings and about $1,100 infrastructure cost. Ask whether model calls, OCR retries, storage, monitoring, audit retention, and abuse controls are included."
+  ],
+  uo: [
+    "LLM Prompt Injection / AI Agent Tool Invocation (AML.T0051, AML.T0053): S8-S16 show multi-agent FTA/COO orchestration and suggestion features. Ask how each agent is isolated, what tools it can call, and how untrusted document text is prevented from becoming an instruction.",
+    "LLM Data Leakage / Unsecured Credentials (AML.T0057, AML.T0055): S17-S21 include custom identity/security ideas such as Atom Log In Security and 10-second OTP. Ask why this is safer than enterprise SSO/MFA and how secrets, sessions, and bot credentials are stored.",
+    "Cost Harvesting / Agentic Resource Consumption (AML.T0034, AML.T0034.002): multi-agent fan-out can multiply model and API calls. Ask what quotas, per-case budgets, and circuit breakers stop runaway analysis."
+  ],
+  nexa: [
+    "Strong ATLAS alignment: S16 already names prompt injection, PII leakage, API-key risk, database/audit-trail protection, infrastructure attack, and ransomware/backup. This is the strongest explicit AI cyber threat model in the decks.",
+    "AI Agent Tool Invocation / Exfiltration via AI Agent Tool Invocation (AML.T0053, AML.T0086): SAP, e2open, SAP GTS, regulatory feeds, and bulk approval create tool-and-data-flow risk. Ask how high-confidence automation is prevented from sending or writing data outside approved channels.",
+    "Cost Harvesting (AML.T0034): S15 has TCO, but the deck should still define quota, rate limit, retry, and anomaly controls for OCR, model, and integration calls."
+  ],
+  "4ce": [
+    "Major ATLAS gap: Use Case 3 needs AI Supply Chain Compromise, Malicious Package, Unsecured Credentials, and LLM Data Leakage controls (AML.T0010, AML.T0011.001, AML.T0055, AML.T0057), but S3-S6 do not describe them.",
+    "AI Agent Tool Invocation (AML.T0053): if the MES copilot can touch requirements, code, tests, repository, or CI/CD tools, those actions need least privilege and human approval. The deck does not define that boundary.",
+    "LLM Prompt Injection (AML.T0051): requirements and tickets can contain malicious or accidental instructions. Ask how the team prevents user stories from steering generated code or tests into unsafe behavior."
+  ],
+  hoppers: [
+    "Unsecured Credentials (AML.T0055): S12 says the source repository contains full environment variables. This is the clearest ATLAS red flag in the report; ask whether real secrets, tokens, tenant IDs, bot credentials, or connection strings were exposed.",
+    "LLM Prompt Injection / LLM Data Leakage (AML.T0051, AML.T0057): S6-S9 show Teams-based RAG, source transparency, safe boundaries, zero-password policy, and monitoring. Ask whether source permissions and secret redaction happen before retrieval, not just after the model answers.",
+    "AI Agent Tool Invocation (AML.T0053): Teams bot permissions can reach Microsoft 365 resources depending on app registration and consent. Ask what delegated/application permissions are granted and how tenant consent is governed."
+  ]
+};
+teams.forEach(t => { t.atlasLens = atlasByTeam[t.id] || []; });
+const interpretationByTeam = {
+  tnt2: {
+    judge: [
+      "This is one of the better RAG governance concepts, but the key claim is still unproven: permission-aware RAG only matters if authorization happens before unauthorized chunks enter the LLM context.",
+      "A mature enterprise design would sync SharePoint/Teams/ServiceNow ACLs into chunk metadata and enforce them through query-time filters. In Qdrant, this usually means payload fields such as tenant_id, source_id, sensitivity, allowed_groups, and allowed_users with payload filtering; in Azure AI Search, this means document-level ACL fields and security filters; in Pinecone/Weaviate, equivalent metadata filtering or tenancy isolation.",
+      "The team should be challenged to explain how permission changes propagate. If a manager removes a user from an AD/Entra group, how quickly does the vector index stop returning those chunks?"
+    ],
+    benchmark: [
+      "Acceptable answer: permissions are enforced before indexing for high-risk sources, at retrieval with identity-aware filters, and after retrieval with a second authorization check before generation.",
+      "Weak answer: the prompt tells the model not to reveal confidential data, or the application only filters the final response.",
+      "Expected proof: sample chunk metadata, sample filtered retrieval query, denied-access test case, audit log showing user, query, retrieved chunk IDs, source ACL version, and final answer."
+    ]
+  },
+  o1: {
+    judge: [
+      "The strong part is architectural separation: tariff calculation should be deterministic/rules-based, while the LLM explains, summarizes, and helps analysts navigate evidence.",
+      "The remaining industry gap is evidence handling. Uploaded invoices, supplier PDFs, and FTA notes are untrusted documents; they can carry prompt-injection text, malformed OCR, or outdated rules.",
+      "Their future agentic roadmap should not be accepted unless tool permissions are explicit: read-only retrieval, draft report generation, and analyst-approved write-back are three different risk classes."
+    ],
+    benchmark: [
+      "Acceptable answer: model never calculates final duty alone; rule engine produces the calculation, analyst approves, immutable log records source versions and reviewer decision.",
+      "Expected controls: document sanitization, official-source allow list, source effective dates, confidence thresholds, human sign-off, tamper-resistant audit storage, and role-based approval delegation.",
+      "Weak answer: AI output is trusted because it cites sources or because analyst can override it later."
+    ]
+  },
+  mind: {
+    judge: [
+      "This deck uses the right words: private RAG, RBAC, secure vector DB, audit trail. The missing part is the control mechanism.",
+      "For onboarding/helpdesk data, the real risk is not just wrong answers. It is leaking access procedures, privileged SOPs, scripts, VPN details, or embedded credentials to a new hire who should not see them.",
+      "A judge should treat generic RBAC claims as incomplete until the team shows identity-to-document permission mapping and secret scanning before ingestion."
+    ],
+    benchmark: [
+      "Acceptable answer: source ACLs are mirrored into chunk metadata; retrieval is filtered by current user/group; stale and conflicting SOPs are quarantined; every answer cites authorized sources only.",
+      "Expected tools: Entra/SSO group claims, DLP/secret scanning, vector DB metadata filters, content-owner review workflow, and audit logs.",
+      "Weak answer: secure vector DB or private cloud is enough. Storage security does not equal answer-level authorization."
+    ]
+  },
+  girls: {
+    judge: [
+      "This is strong on governance and ROI, but the judge should pressure-test whether the impressive ROI depends on assumptions that have not been validated.",
+      "For tariff automation, the industry-standard pattern is AI-assisted evidence extraction plus deterministic duty/FTA calculation plus licensed analyst approval. If the LLM directly decides HTS/FTA/duty, risk rises sharply.",
+      "Their private cloud and RBAC story is directionally good, but supplier PDFs and tariff documents must be treated as hostile inputs until sanitized."
+    ],
+    benchmark: [
+      "Acceptable answer: AI extracts and recommends; a rules engine calculates; high-risk categories force manual review; analyst sign-off is required before ERP/write-back.",
+      "Expected controls: PDF/OCR sanitization, source allow list, effective-date validation, role-based approval, audit retention, urgent regulatory update workflow, and cost quotas.",
+      "Weak answer: 15-minute processing and 80% risk reduction without pilot test data, baseline error rate, or sample validation set."
+    ]
+  },
+  apex: {
+    judge: [
+      "The idea is valuable, but AI-assisted SDLC is one of the highest-risk use cases because the output can become production code for MES.",
+      "A secure code copilot must be wrapped by normal secure SDLC gates: SAST, SCA/dependency scanning, secret scanning, IaC scanning where relevant, test coverage thresholds, human code review, and no direct production deployment.",
+      "The judge should not accept near-zero defect claims unless they can show baseline defect categories, validation datasets, and independent tests not generated from the same flawed requirements."
+    ],
+    benchmark: [
+      "Acceptable answer: AI drafts requirements/code/tests, but CI gates and humans decide; prompts/responses are logged; generated code provenance is tracked; unsafe dependencies and secrets block merge.",
+      "Expected tools: GitHub/GitLab/Azure DevOps PR controls, SAST/SCA/secret scanning, code-owner approval, model-context restrictions, and release audit trail.",
+      "Weak answer: no auto-deploy alone is enough. Insecure generated code can still merge if review gates are shallow."
+    ]
+  },
+  suchaiirmon: {
+    judge: [
+      "The riskiest part is the web crawler plus Gemini plus OCR/PDF pipeline. That is not automatically more secure because it is a desktop app.",
+      "In industry, regulatory feeds should be allow-listed, versioned, effective-dated, and approved before they influence tariff recommendations. A crawler that trusts public pages can ingest outdated or malicious content.",
+      "The judge should force the team to state exactly what data leaves Jabil for Gemini, what is redacted, and what retention/no-training settings apply."
+    ],
+    benchmark: [
+      "Acceptable answer: official source allow list, source hashing/versioning, analyst-approved rule updates, PDF sanitization, prompt-injection filtering, and clear data-boundary documentation.",
+      "Expected controls: signed desktop updates, endpoint hardening, local encryption, secure credential storage, and package/dependency validation.",
+      "Weak answer: PySide6 is safer than web because it is not public. Endpoint compromise and local secret storage still matter."
+    ]
+  },
+  "4real": {
+    judge: [
+      "The biggest issue is credibility: huge savings, very low infrastructure cost, and autonomous processing language do not line up with the control burden of tariff decisions.",
+      "A judge should separate workflow acceleration from decision automation. Reducing manual steps is good; allowing autonomous tariff decisions without strict review is not.",
+      "Supplier declarations and PDFs must be treated as untrusted data. If the deck cannot explain sanitization and audit immutability, WORM and data sovereignty claims remain buzzwords."
+    ],
+    benchmark: [
+      "Acceptable answer: AI extracts and drafts; deterministic engine calculates; analyst approves; immutable audit log stores source versions, calculation version, reviewer, and decision.",
+      "Expected controls: write-once/tamper-resistant audit storage, role definitions, source validation, data-residency details, and realistic cost model including integration, monitoring, and support.",
+      "Weak answer: 15 minutes autonomous is compatible with human sign-off without explaining which actions are autonomous and which require approval."
+    ]
+  },
+  uo: {
+    judge: [
+      "This team has good process thinking and cost modeling, but the security claims need translation into real controls.",
+      "Multi-agent tariff workflows create extra attack surface: each agent may retrieve data, call tools, invoke other agents, or consume budget. The judge should ask for agent isolation and per-tool permissions.",
+      "Blockchain, custom login, and 10-second OTP claims should be treated as red flags unless they solve a specific risk better than standard SSO/MFA, immutable logging, and least privilege."
+    ],
+    benchmark: [
+      "Acceptable answer: enterprise SSO/MFA, role-based authorization, per-agent tool allow lists, read-only default access, human approval for write actions, and quota/circuit-breaker controls.",
+      "Expected controls: prompt-injection tests for each agent, tool-call audit logs, data-flow diagram, source allow list, and reconciliation of security monitoring cost.",
+      "Weak answer: blockchain makes the data secure. It does not replace access control, encryption, audit design, or incident response."
+    ]
+  },
+  nexa: {
+    judge: [
+      "This is the strongest cybersecurity deck because it already thinks in threat-model terms. The judge should spend less time asking whether they know the risks and more time testing the thresholds and assumptions.",
+      "Bulk approval above 90% confidence is the main governance risk. Confidence is not authorization, and it is not a legal/compliance guarantee.",
+      "The budget inconsistency matters because strong security architecture still needs credible operating cost and support ownership."
+    ],
+    benchmark: [
+      "Acceptable answer: confidence threshold is only one gate; prohibited categories, new suppliers, sanctions exposure, low-source-quality items, and random sampling force human review.",
+      "Expected controls: SAP/e2open/GTS least-privilege integration, prompt-injection sanitization, PII stripping validation, tamper-resistant audit, and reconciled TCO formula.",
+      "Weak answer: Azure OpenAI/in-region means the system is secure. Deployment boundary, logging, retention, and data minimization still need proof."
+    ]
+  },
+  "4ce": {
+    judge: [
+      "This is not judge-ready as an AI-governed SDLC proposal. The team picked a high-impact use case but did not provide the security, budget, or POC evidence needed to defend it.",
+      "For MES, AI-generated code/tests can introduce production defects or security weaknesses. The deck does not show the secure SDLC wrapper needed for that risk.",
+      "A judge should ask them to narrow the POC to one sprint artifact and one measurable outcome rather than broad revenue/productivity claims."
+    ],
+    benchmark: [
+      "Acceptable answer: limited POC scope, no production deployment, PR-based review, SAST/SCA/secret scanning, test evidence, human approval, and measured cycle-time/defect baseline.",
+      "Expected controls: code access restrictions, prompt/context logging, dependency validation, release gates, rollback plan, and clear owner for generated artifacts.",
+      "Weak answer: AI improves revenue/productivity without showing measurable SDLC metrics or security controls."
+    ]
+  },
+  hoppers: {
+    judge: [
+      "The environment-variable statement is a material security concern. Even if the repo was not opened, the slide itself creates a secret-management red flag.",
+      "For Teams-based onboarding RAG, the mature pattern is Entra identity, Teams app permission governance, source ACL synchronization, secret scanning before indexing, and security-trimmed retrieval.",
+      "Zero-password policy at answer time is too late if passwords or tokens were indexed. Sensitive content should be blocked before it enters the vector store and again before retrieval."
+    ],
+    benchmark: [
+      "Acceptable answer: repository contains templates only, secrets are stored in Key Vault or equivalent, bot credentials rotate, app permissions are least privilege, and retrieval filters by user/group before the LLM sees chunks.",
+      "Expected controls: Teams app consent review, delegated/application permission list, source DLP scan, chunk ACL metadata, denied-access test, and audit log for query/retrieval/answer.",
+      "Weak answer: the bot promises not to reveal passwords. Prompt behavior cannot compensate for indexed secrets."
+    ]
+  }
+};
+teams.forEach(t => Object.assign(t, interpretationByTeam[t.id] || {}));
+const quickByTeam = {
+  tnt2: {
+    verdict: "Good RAG concept, but security is not proven until ACL filtering is shown end to end.",
+    reward: ["Understands RAG needs grounding, classification, human review, and risk controls.", "Names real leakage and hallucination risks instead of pretending the chatbot is safe by default."],
+    challenge: ["Permission-aware RAG is a claim unless they show ACL metadata and retrieval filters.", "ROI math has a visible inconsistency and no TCO.", "Several important controls are still planned, not live."],
+    ask: ["Show one indexed chunk: what fields store allowed users/groups, classification, source version, and expiry?", "If a user loses access in SharePoint/AD today, when does the vector index stop returning those chunks?", "What is the Year 1 cost after model usage, vector DB, SME review, monitoring, and support?"],
+    accept: ["Best answer: ACLs are captured before indexing, enforced at retrieval with metadata filters, checked again before generation, and tested with denied-access cases."]
+  },
+  o1: {
+    verdict: "Strong governed tariff prototype; the missing piece is cost and tamper-proof audit evidence.",
+    reward: ["Good split: deterministic engine calculates, AI explains, analyst decides.", "Honest pilot framing; they do not overclaim unvalidated benefits."],
+    challenge: ["No real TCO.", "Prototype screenshots do not prove accuracy, latency, or audit integrity.", "Future agentic workflow needs strict tool permissions."],
+    ask: ["Which outputs are rule-engine outputs and which are LLM text?", "How do you prove the approved report and audit log cannot be changed later?", "What threshold fails the pilot: wrong HS code, missing evidence, latency, or analyst override rate?"],
+    accept: ["Best answer: rule engine owns regulated calculation; AI only drafts/explains; analyst approval and immutable audit log are mandatory."]
+  },
+  mind: {
+    verdict: "Reasonable onboarding idea, but too generic on security and value proof.",
+    reward: ["Clear onboarding pain and useful UI mockups.", "Recognizes human judgment and uncertain-answer escalation."],
+    challenge: ["Private RAG and secure vector DB are not enough.", "No structured reason this use case beats tariff/MES.", "Value claims have no formula or budget."],
+    ask: ["How do RBAC permissions reach the vector search filter?", "How do you prevent indexing VPN, password, or privileged access procedures?", "Who owns stale SOP cleanup after launch?"],
+    accept: ["Best answer: source ACL sync, secret scanning, metadata filters, source-owner workflow, and audit logs are all implemented."]
+  },
+  girls: {
+    verdict: "Strong business case and governance story; pressure-test the bold ROI assumptions.",
+    reward: ["Best ROI presentation format: formula, payback, annual scaling.", "Good controls: RBAC/MFA, source attribution, sign-off, escalation, retention."],
+    challenge: ["98% time reduction and 80% risk reduction need evidence.", "$90K investment lacks breakdown.", "Supplier PDFs remain prompt-injection/untrusted-input risk."],
+    ask: ["What pilot data proves 15 minutes per 50 shipments?", "What is inside the $90K and what recurs after Year 1?", "Can the system write to ERP or only recommend until analyst approval?"],
+    accept: ["Best answer: AI extracts/recommends; deterministic rules calculate; analyst approves; high-risk categories force manual review."]
+  },
+  apex: {
+    verdict: "High-value SDLC idea, but risky unless wrapped in real secure SDLC gates.",
+    reward: ["Targets real MES pain: vague PBIs, defects, manual regression.", "Good no-auto-deploy and human-gateway posture."],
+    challenge: ["Near-zero defect cost is not credible without pilot metrics.", "Secure code copilot controls are shallow.", "Seven-week rollout feels too aggressive for MES."],
+    ask: ["Which gates block AI-generated code from merging?", "Do you run SAST, dependency scanning, secret scanning, and code-owner approval?", "What defect baseline proves improvement?"],
+    accept: ["Best answer: AI drafts only; PR review, CI gates, SAST/SCA/secret scanning, tests, and release approval decide."]
+  },
+  suchaiirmon: {
+    verdict: "Real desktop prototype evidence, but the published repo exposes avoidable security and ops weaknesses.",
+    reward: ["Concrete PySide6/Gemini/ChromaDB/Postgres/Mongo implementation.", "More executable than many decks; has login, crawler, dashboard, audit/export modules."],
+    challenge: ["Docker uses default DB credentials and disables Mongo Express basic auth.", "RBAC is largely UI visibility, not a hardened backend enforcement boundary.", "Custom crawler can ingest untrusted URLs/PDFs and dependency audit flags ChromaDB/lxml issues."],
+    ask: ["Why are database admin UIs exposed with default credentials and no basic auth?", "What prevents a non-admin from calling crawler/delete/database functions outside the UI?", "How are custom regulatory URLs allow-listed, sandboxed, dated, and rolled back?"],
+    accept: ["Best answer: unique secrets, admin UI disabled or protected, backend authorization checks, source allow list, PDF sandboxing, dependency remediation, and signed desktop updates."]
+  },
+  "4real": {
+    verdict: "Good executive story, but the savings/cost/autonomy claims look over-simplified.",
+    reward: ["Strong pain narrative and manual-step reduction.", "Uses prioritization matrix and governance language."],
+    challenge: ["$16M savings and ~$1.1K monthly infra cost need reconciliation.", "15-minute autonomous wording conflicts with analyst accountability.", "WORM and data-sovereignty claims lack implementation detail."],
+    ask: ["What exactly is autonomous versus analyst-approved?", "Which WORM technology makes the audit log immutable?", "What cost categories are missing from the $1.1K estimate?"],
+    accept: ["Best answer: AI drafts/extracts; deterministic calculation and analyst approval remain; audit storage is technically immutable."]
+  },
+  uo: {
+    verdict: "Strong process and cost effort, but security language needs technical translation.",
+    reward: ["Good Lean/process framing and detailed RM cost model.", "Broad demo screenshots and workflow evidence."],
+    challenge: ["Blockchain, Atom login, and 10-second OTP sound buzzword-heavy.", "Multi-agent setup increases attack surface and cost fan-out.", "Accuracy improvement is not proven with test data."],
+    ask: ["Why not enterprise SSO/MFA instead of custom Atom login?", "What can each agent read, write, or call?", "What stops runaway multi-agent tool calls and model cost?"],
+    accept: ["Best answer: standard SSO/MFA, per-agent tool allow lists, read-only default, human approval for writes, quotas, and full tool-call logs."]
+  },
+  nexa: {
+    verdict: "Excellent deck, but the public repo contradicts several security claims.",
+    reward: ["Mature slide threat model: prompt injection, PII, API keys, audit, infra, backup.", "Good enterprise integration story with SAP/e2open/GTS and official feeds."],
+    challenge: ["Historical .env exposed a non-empty Supabase URL/key.", "Approval, admin, ingestion, and SAP actions lack real backend auth/RBAC.", "SSRF/TLS-verify-disabled findings undermine the secure-ingestion story."],
+    ask: ["Have the exposed Supabase credentials been revoked and history purged?", "Where is backend identity enforced for approval, senior review, admin jobs, and SAP writeback?", "Why does dry-run PDF fetch arbitrary URLs with TLS verification disabled?"],
+    accept: ["Best answer: rotate/revoke exposed secrets, remove secrets from history, enforce server-side auth/RBAC, allow-list ingestion URLs, enable TLS validation, and make SAP writeback transactional."]
+  },
+  "4ce": {
+    verdict: "Too thin for a high-risk MES SDLC use case.",
+    reward: ["Correctly identifies MES/SDLC as potentially high-impact.", "Attempts to compare alternatives."],
+    challenge: ["No real security model.", "No measurable ROI or budget.", "Prototype evidence is weak/blank."],
+    ask: ["What exact POC will you complete in one sprint?", "What security gate blocks generated code from merge?", "Which metric proves value: PBI cycle time, defect leakage, or SQA effort?"],
+    accept: ["Best answer: narrow POC, no production deployment, PR review, SAST/SCA/secret scanning, tests, and measured baseline."]
+  },
+  hoppers: {
+    verdict: "Good Teams RAG direction, but published code/live app do not prove secure execution.",
+    reward: ["Teams placement is practical for onboarding.", "Understands citations, safe boundaries, and SME verification."],
+    challenge: ["Committed vector store contains SharePoint-derived document text and source URLs without ACL metadata.", "Live Render app is a static site; POST /api/messages returns 404.", "Dependency audit found high-severity LangChain/transitive vulnerabilities."],
+    ask: ["Why is SharePoint document text committed into data/vectors.json?", "How does retrieval enforce the current Teams user's SharePoint permissions?", "Why does the published app not expose the submitted bot endpoint?"],
+    accept: ["Best answer: no real internal docs in repo, vector data excluded from Git, ACL metadata on every chunk, security-trimmed retrieval, updated dependencies, and live bot endpoint proven."]
+  }
+};
+teams.forEach(t => Object.assign(t, quickByTeam[t.id] || {}));
+const publishedReviewByTeam = {
+  girls: {
+    scope: "Published artifact found: Figma prototype link in PPTX. No executable code or live backend was published for review.",
+    evidence: ["PPTX hyperlink extraction found a Figma design URL only.", "Treat the Figma as UI/prototype evidence, not implementation, integration, RBAC, audit, or security evidence."],
+    security: ["No code-level security claims can be verified from Figma.", "Ask them to separate designed controls from implemented controls."]
+  },
+  nexa: {
+    scope: "Reviewed public GitHub repo eavan127/NEXA-AI-Powered-Tariff at main HEAD cb014dc plus commit history.",
+    evidence: ["Git history: commit 00c4e6d added .env; commit 1bfaec9 deleted it. Redacted scan found non-empty SUPABASE_URL and 208-character SUPABASE_KEY in the historical blob.", "backend/api/routes.py:13 hardcodes ANALYST_ID; approval/flag/override audit writes use that constant instead of authenticated user identity.", "backend/api/routes.py:23 defines _require_role, but senior workflows record role_required without calling the role gate.", "backend/api/routes.py:615 and :626 expose /api/admin/dry-run-pdf and fetch arbitrary pdf_url with httpx verify=False.", "backend/api/routes.py:361, :575, :704 expose admin processing, ingestion, and mock-rate-change routes without visible authentication.", "backend/api/routes.py:420 sets shipment status to submitted before write_duty_to_sap at :423, creating failed-SAP/writeback inconsistency risk.", "Bandit found 14 high-severity findings, mainly repeated verify=False and weak MD5 in ingestion/change detection."],
+    security: ["Credential exposure must be treated as real until keys are revoked, rotated, and Git history is purged.", "Server-side auth/RBAC is not proven. Client-provided analyst_id/default senior IDs are not authorization.", "Arbitrary URL fetching plus TLS verification disabled creates SSRF and supply-chain poisoning risk.", "The code supports the concept, but contradicts the deck's strongest governance/security claim."]
+  },
+  hoppers: {
+    scope: "Reviewed public GitHub repo JustJin6/JABIL-IT-Copilot at main HEAD 2dc0440 and live Render URL https://jabil-it-co-pilot.onrender.com/.",
+    evidence: ["env/.env.dev and env/.env.playground are committed; values are mostly empty/tooling placeholders, so the slide's 'full environment variables' claim was not confirmed as real secrets.", "src/index.js:12-13 allows empty BOT_ID/BOT_PASSWORD for local Bot Framework adapter setup.", "src/bot.js:34-35 hardcodes siteContext = Penang and userRole = IT Support Engineer.", "src/vectorStore.js:45-51 saves text, embeddings, and source to data/vectors.json; data/vectors.json includes SharePoint-derived document text and source URLs.", "src/sharepointIngest.js:11-16 uses InteractiveBrowserCredential with tenantId common and localhost redirect; src/run.js:11 points ingestion at a specific SharePoint site.", "npm audit reported 14 production vulnerabilities: 6 high, 8 moderate, including LangChain/core serialization injection and LangChain community SSRF advisories.", "Live check: GET /api/messages returned the static Vite HTML page; POST /api/messages returned 404 Cannot POST /api/messages. The live app does not demonstrate the submitted bot backend."],
+    security: ["The biggest issue is not leaked bot secrets; it is RAG data governance. Committed vectors/document text and no chunk-level ACL metadata make permission-aware retrieval unproven.", "Zero-password response policy is a generation-time promise; industry control should block secrets before indexing and enforce ACLs before retrieval.", "Live demo evidence should be discounted for backend feasibility because the bot endpoint is not deployed or not routed."]
+  },
+  suchaiirmon: {
+    scope: "Reviewed public GitHub repo ChaiWork/Jabil-Hackathon at master HEAD 7a35bdb plus history and Python dependency scans.",
+    evidence: ["README claims PySide6 + Gemini + MongoDB + PostgreSQL + ChromaDB architecture; code contains those modules.", "JTCA/docker-compose.yml:21-23 and :41-43 use default jtca_user/jtca_pass credentials; :59-65 exposes Mongo Express on port 8081 with ME_CONFIG_BASICAUTH=false.", "JTCA/services/auth.py:77-78 seeds default Admin123! and Analyst123! users; :48 and :186-187 allow SHA-256 fallback if bcrypt is unavailable.", "JTCA/ui/crawler_page.py:762-774 hides admin controls based on SessionManager().is_admin(), but this is UI-side visibility rather than a hardened service boundary.", "JTCA/crawler/crawl4ai_service.py:441-550 supports custom URL crawling; :239 directly requests PDF URLs supplied by the workflow.", "Git history contains JTCA/.env, JTCA/data/jtca.db, logs, and many __pycache__ artifacts. The historical .env scan showed placeholders, not an exposed real Gemini key.", "pip-audit found 3 known vulnerabilities across lxml and ChromaDB; ChromaDB advisory is especially relevant because the architecture uses ChromaDB for RAG."],
+    security: ["The prototype is real, but its default deployment is unsafe for anything beyond local demo unless DB/admin credentials are changed and admin web UIs are protected.", "RBAC should be enforced in service/data-access functions, not only by hiding UI widgets.", "Custom crawler inputs need allow-listing, sandboxing, content-size limits, malware/PDF handling, source approval, and rollback."]
+  }
+};
+teams.forEach(t => { if (publishedReviewByTeam[t.id]) t.publishedReview = publishedReviewByTeam[t.id]; });
+const scoreByTeam = {
+  tnt2: {
+    total: 66,
+    breakdown: { problem: 13, priority: 12, governance: 18, value: 10, feasibility: 13 },
+    why: "Clear onboarding/RAG problem and reasonable governance thinking, but prioritization is qualitative, security controls are partly planned, ROI has inconsistency, and implementation/TCO detail is thin."
+  },
+  o1: {
+    total: 86,
+    breakdown: { problem: 14, priority: 16, governance: 23, value: 15, feasibility: 18 },
+    why: "Strong tariff problem framing, clear AI-versus-deterministic boundary, strong prototype evidence, and honest pilot validation. Main deductions are missing TCO and proof of audit integrity/accuracy."
+  },
+  mind: {
+    total: 53,
+    breakdown: { problem: 12, priority: 7, governance: 14, value: 8, feasibility: 12 },
+    why: "Understandable onboarding concept and mockups, but weak prioritization, generic security controls, unsupported value claims, and no budget or data-readiness proof."
+  },
+  girls: {
+    total: 86,
+    breakdown: { problem: 14, priority: 16, governance: 22, value: 18, feasibility: 16 },
+    why: "Strong tariff use case, strong ROI presentation, and good governance/HITL controls. Deductions come from bold assumptions, under-broken-down $90K cost, and limited proof behind time/risk reduction."
+  },
+  apex: {
+    total: 77,
+    breakdown: { problem: 14, priority: 16, governance: 18, value: 14, feasibility: 15 },
+    why: "High-impact MES SDLC problem with useful AI workflow and measurable targets, but secure SDLC controls, validation method, and 7-week feasibility need stronger proof."
+  },
+  suchaiirmon: {
+    total: 55,
+    breakdown: { problem: 12, priority: 14, governance: 9, value: 9, feasibility: 11 },
+    why: "Concrete tariff automation stack and real desktop-code evidence, but public repo review found default DB credentials, unauthenticated Mongo Express, UI-side RBAC, custom crawler risk, dependency vulnerabilities, and weak budget proof."
+  },
+  "4real": {
+    total: 71,
+    breakdown: { problem: 14, priority: 17, governance: 15, value: 13, feasibility: 12 },
+    why: "Strong executive problem story and prioritization matrix, but $16M savings, $1.1K infrastructure cost, autonomous wording, and high-level security controls need hard validation."
+  },
+  uo: {
+    total: 77,
+    breakdown: { problem: 13, priority: 15, governance: 15, value: 17, feasibility: 17 },
+    why: "Good process framing, many demo screens, and detailed RM cost/payback model. Deductions come from buzzword-heavy security, custom auth/blockchain claims, and unproven accuracy."
+  },
+  nexa: {
+    total: 78,
+    breakdown: { problem: 15, priority: 18, governance: 14, value: 17, feasibility: 14 },
+    why: "Excellent slide threat model and business case, but public code review materially reduces governance/feasibility confidence: historical credential exposure, no real backend auth/RBAC, exposed admin routes, SSRF/TLS-validation gaps, and SAP writeback integrity risk."
+  },
+  "4ce": {
+    total: 29,
+    breakdown: { problem: 8, priority: 8, governance: 5, value: 3, feasibility: 5 },
+    why: "High-level MES idea only. Too little evidence for governance, quantification, POC execution, budget, or secure SDLC controls; prototype/wireframe evidence is weak."
+  },
+  hoppers: {
+    total: 46,
+    breakdown: { problem: 13, priority: 8, governance: 9, value: 7, feasibility: 9 },
+    why: "Good Teams/onboarding direction, but published evidence shows committed vector/document data without ACL metadata, high/moderate npm audit findings, hardcoded role/site context, and a live app that does not expose the submitted bot endpoint."
+  }
+};
+teams.forEach(t => { t.score = scoreByTeam[t.id]; });
+const select = document.getElementById('teamSelect');
+const panel = document.getElementById('teamPanel');
+const comparison = document.getElementById('comparisonTable');
+function e(s) { return String(s ?? '').replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch])); }
+function list(items) { return `<ul>${items.map(x => `<li>${e(x)}</li>`).join('')}</ul>`; }
+function section(title, items, cls='') { return `<div class="section-card ${cls}"><h3>${e(title)}</h3>${Array.isArray(items) ? list(items) : items}</div>`; }
+function pickTop(items, n=3) { return Array.isArray(items) ? items.slice(0, n) : items; }
+function short(s, n=170) { const v = String(s ?? ''); return v.length > n ? `${v.slice(0, n - 1)}...` : v; }
+function optionText(s) { return String(s ?? '').replace(/^[A-D]\.\s*/i, ''); }
+function initials(name) { return String(name || '').replace(/[^A-Za-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map(x => x[0]).join('').toUpperCase() || 'T'; }
+function toneClass(team) { return `tone-${(Number(team.teamNo) || 0) % 5}`; }
+function toneColor(team) { return ['#1557ff','#ef3f2f','#f7b718','#20a978','#111111'][(Number(team.teamNo) || 0) % 5]; }
+function scoreRisk(score) {
+  const total = score?.total || 0;
+  if (total >= 82) return 'Strong contender';
+  if (total >= 72) return 'Defensible with gaps';
+  if (total >= 55) return 'Needs hard challenge';
+  return 'Major evidence gap';
+}
+function proofStrip(team) {
+  const items = [
+    ['Use case', team.useCase],
+    ['Security read', team.securityMaturity],
+    ['Value proof', team.valueEvidence],
+    ['Major flag', team.majorFlag]
+  ];
+  return `<div class="proof-strip">${items.map(([k, v]) => `<div class="proof-chip"><b>${e(k)}</b><span>${e(v)}</span></div>`).join('')}</div>`;
+}
+function scenarioBlock(items) {
+  if (!items || !items.length) return '';
+  return `<div class="section-card warn"><h3>CISSP-Style Scenario Questions</h3><p class="note">Ask for the BEST, FIRST, or MOST defensible answer. The choices are intentionally close: most are partially valid, but only one best matches risk, governance, and evidence.</p>${items.map((q, i) => `<div class="scenario-card"><h4>Scenario ${i + 1}</h4><p>${e(q.scenario)}</p><ol class="scenario-options" type="A">${q.options.map(o => `<li>${e(optionText(o))}</li>`).join('')}</ol><p class="note"><strong>What to listen for:</strong> ${e(q.listenFor)}</p></div>`).join('')}</div>`;
+}
+function atlasBlock(items) {
+  if (!items || !items.length) return '';
+  return `<div class="section-card warn"><h3>MITRE ATLAS AI Threat Mapping</h3><p class="note">Supplemental AI threat lens based on MITRE ATLAS 2026.05. These points connect the team's slide evidence to AI-specific attack techniques and mitigations.</p>${list(items)}</div>`;
+}
+function publishedBlock(team) {
+  const p = team.publishedReview;
+  if (!p) return '';
+  return `<div class="section-card warn" style="margin-top:12px"><h3>Published Code / Live Evidence Review</h3><p class="note">${e(p.scope)}</p><div class="grid-2" style="margin-top:10px"><div><h4>Evidence</h4>${list(p.evidence)}</div><div><h4>Security Interpretation</h4>${list(p.security)}</div></div></div>`;
+}
+function detailsSection(title, html) {
+  return `<details><summary>${e(title)}</summary>${html}</details>`;
+}
+function scoreBlock(score) {
+  if (!score) return '';
+  const b = score.breakdown || {};
+  const items = [
+    ['Problem', b.problem, 15],
+    ['Priority', b.priority, 20],
+    ['AI Gov', b.governance, 25],
+    ['Value', b.value, 20],
+    ['POC', b.feasibility, 20]
+  ];
+  const bars = items.map(([label, val, max]) => {
+    const pct = Math.max(0, Math.min(100, Math.round(((val || 0) / max) * 100)));
+    return `<div class="bar-row"><span>${e(label)}</span><div class="bar-track"><div class="bar-fill" style="--w:${pct}%"></div></div><span>${e(val)}/${max}</span></div>`;
+  }).join('');
+  return `<div class="section-card score-card"><h3>Suggested Score: ${score.total}/100</h3><div class="score-grid">${items.map(([label, val, max]) => `<div class="score-mini"><b>${e(label)}</b><span>${e(val)}</span><small>/${max}</small></div>`).join('')}</div>${bars}<p class="note">${e(score.why)}</p></div>`;
+}
+function rubricBlock(team) {
+  return `<div class="section-card"><h3>Day 1 Rubric Critique</h3><div class="section-stack">${Object.entries(team.rubric).map(([k,v]) => `<div class="finding"><h4>${e(k)}</h4><div>${e(v)}</div></div>`).join('')}</div></div>`;
+}
+function renderTeam(id) {
+  const team = teams.find(t => t.id === id) || teams[0];
+  const warnSecurity = (team.majorFlag + ' ' + team.securityMaturity).toLowerCase().includes('security') || team.majorFlag.toLowerCase().includes('environment');
+  const pct = Math.max(0, Math.min(100, Number(team.score?.total || 0)));
+  panel.innerHTML = `
+    <div class="team-hero">
+      <div class="team-identity">
+        <div class="team-avatar ${toneClass(team)}">${e(initials(team.name))}</div>
+        <div>
+          <div class="team-kicker">Team ${e(team.teamNo)} / ${e(scoreRisk(team.score))}</div>
+          <h2>${e(team.name)}</h2>
+          <div class="sub">${e(team.folder)} · ${e(team.useCase)}</div>
+        </div>
+      </div>
+      <div class="score-plate">
+        <div class="score-ring" style="--pct:${pct}%;--tone:${toneColor(team)}"><div class="score-inner"><div>${e(team.score?.total ?? 'N/A')}<small>/100</small></div></div></div>
+        <div class="small" style="margin-top:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:900">Suggested score</div>
+      </div>
+    </div>
+    <div class="verdict">${e(team.verdict || team.majorFlag)}</div>
+    ${proofStrip(team)}
+    <div style="margin-top:12px">${scoreBlock(team.score)}</div>
+    <div class="compact-row">
+      ${section('Reward', pickTop(team.reward || team.strengths), 'priority')}
+      ${section('Challenge Hard', pickTop(team.challenge || team.challengePoints || team.weaknesses), 'warn')}
+      ${section('Ask These', pickTop(team.ask || team.questions), 'warn')}
+    </div>
+    <div class="grid-2" style="margin-top:12px">
+      ${section('Acceptable Answer Sounds Like', pickTop(team.accept || team.benchmark || team.security), 'priority')}
+      ${section('Budget / ROI Check', (team.budget || []).slice(0, 3))}
+    </div>
+    ${publishedBlock(team)}
+    ${detailsSection('Detailed Technical Notes', `<div class="grid-2">${section('Judge Interpretation / What This Really Means', team.judge || team.weaknesses, 'priority')}${section('Industry Benchmark / Expected Controls', team.benchmark || team.security, 'priority')}</div><div class="grid-2" style="margin-top:12px">${section("Doesn't Make Sense / Challenge Hard", team.challengePoints || team.weaknesses, 'warn')}${section('Security And AI Governance Critique', team.security, warnSecurity ? 'warn' : '')}</div><div style="margin-top:12px">${atlasBlock(team.atlasLens)}</div><div style="margin-top:12px">${scenarioBlock(team.scenarioQuestions)}</div>`)}
+    ${detailsSection('Slide Evidence Backup', `<div class="grid-2">${section('Good Things / Strengths', team.strengths)}${section('Bad Things / Weaknesses', team.weaknesses)}</div><div style="margin-top:12px">${rubricBlock(team)}</div><div class="grid-2" style="margin-top:12px">${section('Strong Evidence And Supporting Facts', team.strongEvidence || team.evidence)}${section('Evidence Notes', team.evidence)}</div>`)}
+  `;
+}
+function renderComparison() {
+  comparison.innerHTML = [...teams].sort((a,b) => (b.score?.total || 0) - (a.score?.total || 0)).map((t, i) => {
+    const score = Math.max(0, Math.min(100, Number(t.score?.total || 0)));
+    const b = t.score?.breakdown || {};
+    return `<article class="rank-card" role="listitem">
+      <div class="rank-card-head">
+        <div class="rank-title"><div class="rank-dot">${i + 1}</div><div><h3>Team ${e(t.teamNo)}: ${e(t.name)}</h3><span class="note">${e(scoreRisk(t.score))}</span></div></div>
+        <div class="rank-score"><span>Suggested</span>${e(t.score?.total ?? 'N/A')}/100</div>
+      </div>
+      <div class="mini-scorebar"><span style="--pct:${score}%"></span></div>
+      <div class="rank-breakdown"><span>Problem ${e(b.problem ?? '')}/15</span><span>Priority ${e(b.priority ?? '')}/20</span><span>AI Gov ${e(b.governance ?? '')}/25</span><span>Value ${e(b.value ?? '')}/20</span><span>POC ${e(b.feasibility ?? '')}/20</span></div>
+      <div class="rank-detail-grid">
+        <div class="rank-detail"><b>Judge read</b><p>${e(short(t.verdict || t.majorFlag, 190))}</p></div>
+        <div class="rank-detail"><b>Why this score</b><p>${e(short(t.score?.why || '', 240))}</p></div>
+        <div class="rank-detail"><b>Best question</b><p>${e(short((t.ask || t.questions || [''])[0], 190))}</p></div>
+        <div class="rank-detail"><b>Value / budget claim</b><p>${e(short(t.valueEvidence, 180))}</p></div>
+      </div>
+    </article>`;
+  }).join('');
+}
+teams.forEach(t => { const opt = document.createElement('option'); opt.value = t.id; opt.textContent = `Team ${t.teamNo}: ${t.name}`; select.appendChild(opt); });
+select.addEventListener('change', () => renderTeam(select.value));
+renderComparison();
+renderTeam(teams[0].id);
+</script>
+</body>
+</html>
