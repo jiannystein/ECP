@@ -113,6 +113,9 @@ button{border:2px solid var(--black);border-radius:8px;background:#111;color:#ff
 const SHA_TARGET = '918777243dc8acc62bd60336f1b2b299e50695cd1be3420b7a395a871395ef9b';
 const FALLBACK_TARGET = '1293bb80';
 const REPORT_URL = 'report.html';
+const FINALS_SHA_TARGET = '5d184c4a3063d2e5dc8aa1de1e580d7a536f4b2ee5c20bd8aa71bb44c771656a';
+const FINALS_FALLBACK_TARGET = '3fe3bcc0';
+const FINALS_REPORT_URL = 'finals_judge_prep.html';
 const signals = ['Problem clarity','Priority logic','AI governance','Value proof','POC feasibility'];
 const risks = ['Prompt injection','ACL drift','Secret leakage','Model overreach','Cost harvesting','Stale evidence','RBAC theater','Audit gaps'];
 const themes = ['Governance drift','Budget fog','RAG leakage','Agent boundary','Evidence entropy','Score calibration'];
@@ -178,12 +181,19 @@ async function tryUnlock(value) {
   const normalized = value.trim().toUpperCase();
   if (!normalized) return;
   const hash = await phraseHash(normalized);
-  if (hash === SHA_TARGET || fallbackHash(normalized) === FALLBACK_TARGET) {
+  const fallback = fallbackHash(normalized);
+  let targetUrl = '';
+  if (hash === FINALS_SHA_TARGET || fallback === FINALS_FALLBACK_TARGET) {
+    targetUrl = FINALS_REPORT_URL;
+  } else if (hash === SHA_TARGET || fallback === FALLBACK_TARGET) {
+    targetUrl = REPORT_URL;
+  }
+  if (targetUrl) {
     sessionStorage.setItem('ecp-archive-open', '1');
     document.getElementById('lockState').textContent = 'Open';
     msg.style.color = '#117a55';
     msg.textContent = 'Control phrase accepted.';
-    setTimeout(() => location.replace(REPORT_URL), 320);
+    setTimeout(() => location.replace(targetUrl), 320);
   } else {
     msg.style.color = '#ef3f2f';
     msg.textContent = 'Control phrase rejected.';

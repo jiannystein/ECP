@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finals Judge Prep Brief</title>
+  <style>
+    :root {
+      --bg: #eef2f6;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6b7c;
+      --line: #d9e0ea;
+      --navy: #14324d;
+      --blue: #1d5d9b;
+      --teal: #0d766f;
+      --amber: #a76000;
+      --red: #a3382a;
+      --green: #2f7045;
+      --soft-blue: #eef5fb;
+      --soft-amber: #fff7e6;
+      --soft-red: #fff2f0;
+      --soft-green: #eef8f2;
+      --shadow: 0 10px 28px rgba(22, 32, 51, .08);
+      --tight-shadow: 0 1px 2px rgba(22, 32, 51, .06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Aptos, "Segoe UI", Arial, sans-serif;
+      line-height: 1.48;
+    }
+    header {
+      background: #102238;
+      color: #fff;
+      padding: 16px 28px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      box-shadow: 0 12px 26px rgba(16, 34, 56, .18);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    header p {
+      margin: 2px 0 0;
+      color: #dceaf7;
+      max-width: 1120px;
+      font-size: 12px;
+    }
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(280px, 440px);
+      gap: 18px;
+      align-items: center;
+    }
+    .team-picker label {
+      display: block;
+      color: #dceaf7;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .05em;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+    .team-picker select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.28);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font: inherit;
+      font-weight: 800;
+    }
+    main {
+      max-width: 1520px;
+      margin: 0 auto;
+      padding: 18px 28px 48px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin: 18px 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      color: var(--navy);
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--navy);
+    }
+    h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--blue);
+    }
+    p { margin: 7px 0; }
+    ul { margin: 7px 0 0; padding-left: 20px; }
+    li { margin: 5px 0; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .rubric-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    .mini {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+    }
+    .mini strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .quick-strip {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .compact-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--tight-shadow);
+      padding: 12px 14px;
+    }
+    .compact-card h2,
+    .compact-card h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+    .rule-row {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .rule-chip {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 12px;
+      min-height: 56px;
+    }
+    .rule-chip b {
+      display: block;
+      color: var(--blue);
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+    .watch-list {
+      margin-top: 0;
+      box-shadow: var(--tight-shadow);
+    }
+    .watch-list summary {
+      padding: 11px 13px;
+    }
+    .warning {
+      background: var(--soft-amber);
+      border-color: #f3cf86;
+    }
+    .risk {
+      background: var(--soft-red);
+      border-color: #f0b9b1;
+    }
+    .good {
+      background: var(--soft-green);
+      border-color: #bfe4ce;
+    }
+    .team {
+      padding: 0;
+      overflow: hidden;
+    }
+    .team-head {
+      background: linear-gradient(135deg, #ffffff, #f7fafc);
+      border-bottom: 1px solid var(--line);
+      padding: 15px 18px;
+      display: grid;
+      gap: 16px;
+      align-items: start;
+    }
+    .team-head h2 { margin-bottom: 4px; }
+    .team-body { padding: 18px; }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: var(--soft-blue);
+      color: #18456f;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .tag.amber { background: var(--soft-amber); color: #7b4a00; }
+    .tag.red { background: var(--soft-red); color: var(--red); }
+    .tag.green { background: var(--soft-green); color: var(--green); }
+    .question-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .question {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(260px, 360px) 1fr;
+      min-height: 210px;
+      box-shadow: var(--tight-shadow);
+    }
+    .question-media {
+      border-right: 1px solid var(--line);
+      background: #eef2f6;
+      display: flex;
+      flex-direction: column;
+    }
+    .question-media a {
+      display: block;
+      line-height: 0;
+    }
+    .question-media img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #fff;
+    }
+    .slide-caption {
+      padding: 8px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .question-copy {
+      padding: 14px 15px 13px;
+    }
+    .criteria {
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 6px;
+    }
+    .ask {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--navy);
+      margin: 0 0 9px;
+    }
+    .cue-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .cue {
+      border-left: 3px solid var(--line);
+      padding-left: 9px;
+      font-size: 13px;
+    }
+    .cue b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--navy);
+    }
+    .cue.strong { border-color: var(--green); }
+    .cue.flag { border-color: var(--red); }
+    .cue.why { border-color: var(--blue); }
+    details {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      margin-top: 12px;
+    }
+    summary {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 900;
+      color: var(--navy);
+    }
+    .details-body {
+      border-top: 1px solid var(--line);
+      padding: 14px;
+    }
+    .source-list a { color: var(--blue); }
+    .footer-note {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    @media (max-width: 1100px) {
+      .rubric-grid, .rule-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .quick-strip { grid-template-columns: 1fr; }
+      .question { grid-template-columns: 1fr; }
+      .question-media { border-right: 0; border-bottom: 1px solid var(--line); }
+      .cue-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      main { padding: 16px 14px 40px; }
+      header { padding: 14px 16px; }
+      .topbar { grid-template-columns: 1fr; gap: 10px; }
+      .grid-2, .grid-3, .rubric-grid, .team-head { grid-template-columns: 1fr; }
+      .rule-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div>
+        <h1>Finals Judge Prep</h1>
+        <p>Slide-linked must-ask questions. 30 minutes per team, including Q&amp;A. No scores.</p>
+      </div>
+      <div class="team-picker">
+        <label for="teamSelect">Select team</label>
+        <select id="teamSelect" aria-label="Select finalist team">
+          <option value="sleep">O(1) Sleep O(n) Gain</option>
+          <option value="4real">4Real</option>
+          <option value="girls">Girls Power</option>
+          <option value="nexa">NEXA</option>
+          <option value="uo">UO Double U Pro Max</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="quick-strip">
+      <section id="cheat-sheet" class="compact-card">
+        <h2>Rubric Anchor</h2>
+        <div class="rule-row">
+          <div class="rule-chip"><b>10%</b>Problem clarity</div>
+          <div class="rule-chip"><b>15%</b>Prioritization</div>
+          <div class="rule-chip"><b>20%</b>AI governance</div>
+          <div class="rule-chip"><b>15%</b>Value proof</div>
+          <div class="rule-chip"><b>20%</b>POC feasibility</div>
+          <div class="rule-chip"><b>20%</b>Convincing power</div>
+        </div>
+      </section>
+
+      <details id="must-watch" class="watch-list">
+        <summary>Cross-team watch list</summary>
+        <div class="details-body">
+          <ul>
+            <li>Projected ROI versus measured prototype result.</li>
+            <li>Human approval that cannot be bypassed.</li>
+            <li>Audit trail immutability, source versioning, and reviewer identity.</li>
+            <li>Exact data boundary for SAP, e2open, regulatory feeds, and AI models.</li>
+            <li>Owner for tariff sources, model thresholds, incidents, support, and retraining.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <section class="team" id="sleep">
+      <div class="team-head">
+        <div>
+          <h2>O(1) Sleep O(n) Gain</h2>
+          <p class="note">Use Case 2 - Tariff Co-Pilot. Strong separation between deterministic calculations, AI explanation, analyst decision, and pilot validation.</p>
+          <div class="tag-row">
+            <span class="tag green">Governance clear</span>
+            <span class="tag">Pilot-minded</span>
+            <span class="tag amber">Full TCO still thin</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-body">
+        <h3>Must-Ask Questions</h3>
+        <div class="question-list">
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/sleep-s26.png"><img src="finals_judge_prep_assets/slides/sleep-s26.png" alt="O(1) Sleep O(n) Gain slide 26"></a>
+              <div class="slide-caption">Finals slide 26 - expected value and testing methodology.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Quantify Potential Value</div>
+              <p class="ask">Which numbers are measured prototype results, and which are case-study targets still waiting for pilot validation?</p>
+              <p>The slide correctly labels the 98% time reduction and USD 2,000 exposure reduction as targets, but judges need the proof plan.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Prevents projected benefits from being treated as demonstrated results.</div>
+                <div class="cue strong"><b>Strong answer</b>Names measured metrics today, then states pilot sample size, baseline, SME reference answer set, and pass/fail thresholds.</div>
+                <div class="cue flag"><b>Red flags</b>"The case study already gives the savings" or no plan to compare against human analyst decisions.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/sleep-s07.png"><img src="finals_judge_prep_assets/slides/sleep-s07.png" alt="O(1) Sleep O(n) Gain slide 7"></a>
+              <div class="slide-caption">Finals slide 7 - three operating principles.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">Draw the hard boundary: which outputs are deterministic calculations, and which outputs are AI-generated explanations?</p>
+              <p>The strongest part of this concept is the claim that rules calculate while AI explains. Make them operationalize that boundary.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Tariff and FTA outputs create compliance exposure if a model invents or mutates them.</div>
+                <div class="cue strong"><b>Strong answer</b>Duty, landed cost, COO, FTA treatment, and risk thresholds are rule/service outputs; AI summarizes evidence and recommends review actions only.</div>
+                <div class="cue flag"><b>Red flags</b>The model calculates final duties, changes thresholds, or writes results without analyst approval.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/sleep-s24.png"><img src="finals_judge_prep_assets/slides/sleep-s24.png" alt="O(1) Sleep O(n) Gain slide 24"></a>
+              <div class="slide-caption">Finals slide 24 - benchmarking methodology.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Execution Plan &amp; Feasibility</div>
+              <p class="ask">What are the exact decision gates before this moves from controlled pilot to live parallel run?</p>
+              <p>The slide has the right evaluation categories, but not the thresholds a sponsor can approve.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Without gates, "pilot first" becomes a vague promise.</div>
+                <div class="cue strong"><b>Strong answer</b>Defines minimum duty accuracy, FTA agreement, evidence-gap detection, false positive rate, audit completeness, and analyst acceptance targets.</div>
+                <div class="cue flag"><b>Red flags</b>Only time savings are measured, or the team cannot say what failure would stop rollout.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/sleep-s25.png"><img src="finals_judge_prep_assets/slides/sleep-s25.png" alt="O(1) Sleep O(n) Gain slide 25"></a>
+              <div class="slide-caption">Finals slide 25 - risks and controls.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">How will you prove the audit trail cannot be altered after analyst approval?</p>
+              <p>The deck says audit trail and human accountability. Ask what makes it durable under real compliance scrutiny.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Traceability is central to regulated decisions and stakeholder confidence.</div>
+                <div class="cue strong"><b>Strong answer</b>Append-only log, role separation, source and model version IDs, reviewer ID, override reason, retention rule, and independent export/reporting.</div>
+                <div class="cue flag"><b>Red flags</b>Audit rows are editable database records, or logs omit source version and reviewer action.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/sleep-s23.png"><img src="finals_judge_prep_assets/slides/sleep-s23.png" alt="O(1) Sleep O(n) Gain slide 23"></a>
+              <div class="slide-caption">Finals slide 23 - current prototype versus future extensions.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Stakeholder Convincing Power</div>
+              <p class="ask">What is the full first-year cost once SME validation, security review, hosting, monitoring, and support are included?</p>
+              <p>The pilot-cost slide is useful, but it focuses on direct tools and optional upgrades.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Stakeholders approve operating models, not only a low monthly prototype bill.</div>
+                <div class="cue strong"><b>Strong answer</b>Separates prototype, controlled pilot, and production costs, including trade SME time and platform ownership.</div>
+                <div class="cue flag"><b>Red flags</b>Only model/API cost is counted, or "existing internal environment" hides real support burden.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <details>
+          <summary>Backup Questions, Day 1 Consistency, And External Notes</summary>
+          <div class="details-body grid-2">
+            <div>
+              <h4>Backup questions</h4>
+              <ul>
+                <li>Prioritization: what weighted comparison made tariff beat onboarding and MES, beyond "high enterprise impact"?</li>
+                <li>Data readiness: who approves tariff, FTA, COO, and supplier evidence sources before retrieval?</li>
+                <li>Adoption: what will stop analysts from redoing every AI-assisted result manually?</li>
+                <li>Security: what role privileges exist at pilot stage versus future enterprise SSO/RBAC?</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Day 1 consistency</h4>
+              <p>Consistent use case, governance framing, and baseline discipline from Day 1 to Finals. Finals adds pilot-cost detail, but the full production TCO remains the main missing sponsor question.</p>
+              <h4>External-material note</h4>
+              <p>The embedded Canva link opened to a public Canva video editor page titled "Untitled design - Video", but the canvas rendered blank in this environment. If the team cites it, ask them to show what it proves live.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="team" id="4real">
+      <div class="team-head">
+        <div>
+          <h2>4Real</h2>
+          <p class="note">Use Case 2 - TRACE. Clear story around tariff automation, with strong visual architecture/governance slides but several text-sparse demo sections.</p>
+          <div class="tag-row">
+            <span class="tag">Clear prioritization</span>
+            <span class="tag amber">Evidence is visual-heavy</span>
+            <span class="tag amber">Value math needs probing</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-body">
+        <h3>Must-Ask Questions</h3>
+        <div class="question-list">
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/4real-s03.png"><img src="finals_judge_prep_assets/slides/4real-s03.png" alt="4Real slide 3"></a>
+              <div class="slide-caption">Finals slide 3 - systems problem framing.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Business Problem Clarity</div>
+              <p class="ask">What evidence supports the scale of the problem: 25+ countries, 40+ analysts, and 100,000 annual manual hours?</p>
+              <p>The problem framing is strong, but the scale claim drives the business case.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>The ROI depends on whether the problem is site-level, regional, or global.</div>
+                <div class="cue strong"><b>Strong answer</b>States source, calculation method, analyst count, batches per month, and whether the estimate is Jabil-validated or assumed.</div>
+                <div class="cue flag"><b>Red flags</b>Global figures are extrapolated from one example with no sensitivity range.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/4real-s04.png"><img src="finals_judge_prep_assets/slides/4real-s04.png" alt="4Real slide 4"></a>
+              <div class="slide-caption">Finals slide 4 - three options comparison.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Ability to Prioritize Work Items</div>
+              <p class="ask">Why is tariff "lower implementation risk" when it touches regulated trade data, duty calculation, and external rule changes?</p>
+              <p>The comparison slide makes a decisive claim. The best answer should acknowledge tariff risk rather than dismiss it.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Judges should reward trade-off maturity, not only selection confidence.</div>
+                <div class="cue strong"><b>Strong answer</b>Explains lower POC risk because data is structured and scope can be read-only/parallel, while regulatory and write-back risk stay gated.</div>
+                <div class="cue flag"><b>Red flags</b>"Tariff is lower risk" without explaining human approval, no-write pilot, or exception handling.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/4real-s15.png"><img src="finals_judge_prep_assets/slides/4real-s15.png" alt="4Real slide 15"></a>
+              <div class="slide-caption">Finals slide 15 - how TRACE was built.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Execution Plan &amp; Feasibility</div>
+              <p class="ask">Which modules in this build are functional today, and which are storyboarded architecture?</p>
+              <p>This slide has the most useful implementation map. Force the live/future split.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>A prototype should prove at least one end-to-end path, not only a future platform map.</div>
+                <div class="cue strong"><b>Strong answer</b>Identifies working dashboard, classification/rule logic, trade dashboard, governance gateway, data source, and mock versus real integrations.</div>
+                <div class="cue flag"><b>Red flags</b>All modules are described conceptually, or demo data cannot be traced to calculation logic.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/4real-s17.png"><img src="finals_judge_prep_assets/slides/4real-s17.png" alt="4Real slide 17"></a>
+              <div class="slide-caption">Finals slide 17 - four pillars of governance.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">How are human-in-the-loop, access control, audit trail, and escalation enforced technically?</p>
+              <p>The governance pillars are the right four topics. Ask for implementation mechanisms.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Governance slides can be aspirational unless controls are wired into the workflow.</div>
+                <div class="cue strong"><b>Strong answer</b>Maps each pillar to roles, permissions, approval states, immutable logs, escalation rules, and blocked write actions.</div>
+                <div class="cue flag"><b>Red flags</b>Governance is a policy statement, not enforced by workflow or access rules.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/4real-s28.png"><img src="finals_judge_prep_assets/slides/4real-s28.png" alt="4Real slide 28"></a>
+              <div class="slide-caption">Finals slide 28 - implementation challenges and risks.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Execution Plan &amp; Feasibility</div>
+              <p class="ask">For the highest rollout risk on this slide, who owns it and what is the mitigation before go-live?</p>
+              <p>The slide names challenges. The judge question should turn them into accountable execution.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Enterprise feasibility depends on owners, sequence, and fallback path.</div>
+                <div class="cue strong"><b>Strong answer</b>Names one owner per risk, pilot controls, change-management plan, data-quality remediation, compliance review, and rollback.</div>
+                <div class="cue flag"><b>Red flags</b>"IT will handle it" or risk mitigation is deferred until after deployment.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <details>
+          <summary>Backup Questions, Day 1 Consistency, And External Notes</summary>
+          <div class="details-body grid-2">
+            <div>
+              <h4>Backup questions</h4>
+              <ul>
+                <li>Value: what is the cost model and payback period behind TRACE?</li>
+                <li>Security: what exact data stays inside Jabil, and what reaches any model or external service?</li>
+                <li>Audit: what source versions are logged with each recommendation?</li>
+                <li>Demo: can the team walk through one shipment from input to analyst-approved result?</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Day 1 consistency</h4>
+              <p>Consistent use case and prioritization story from Day 1 to Finals. Finals expands the demo, architecture, governance, roadmap, and risk slides. The evidence remains visually rich but text-sparse, so ask them to narrate specifics.</p>
+              <h4>External-material note</h4>
+              <p>No external slide links were found in the Finals deck relationships.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="team" id="girls">
+      <div class="team-head">
+        <div>
+          <h2>Girls Power</h2>
+          <p class="note">Use Case 2 - AITradeX. Clear story, concise ROI formula, explicit limitations, and a linked unlisted YouTube demo.</p>
+          <div class="tag-row">
+            <span class="tag">Clear ROI formula</span>
+            <span class="tag green">Limits acknowledged</span>
+            <span class="tag amber">Assumptions need validation</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-body">
+        <h3>Must-Ask Questions</h3>
+        <div class="question-list">
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/girls-s17.png"><img src="finals_judge_prep_assets/slides/girls-s17.png" alt="Girls Power slide 17"></a>
+              <div class="slide-caption">Finals slide 17 - ROI methodology.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Quantify Potential Value</div>
+              <p class="ask">Defend the ROI formula: why USD 35/hour, 12.25 hours saved, and USD 2,000 risk avoided per batch?</p>
+              <p>The slide is useful because it exposes the math. Now ask whether the inputs fit Jabil and this process.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>A transparent formula is only as strong as its assumptions.</div>
+                <div class="cue strong"><b>Strong answer</b>States which inputs come from the case brief, which are external salary assumptions, and shows sensitivity for labor rate and error risk.</div>
+                <div class="cue flag"><b>Red flags</b>Risk avoided is treated as guaranteed cash savings, or analyst rate is not adjusted for Jabil/site context.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/girls-s20.png"><img src="finals_judge_prep_assets/slides/girls-s20.png" alt="Girls Power slide 20"></a>
+              <div class="slide-caption">Finals slide 20 - solution pricing.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Stakeholder Convincing Power</div>
+              <p class="ask">Please bridge the Day 1 and Finals cost/ROI changes: why did investment move from about USD 90K to USD 95.5K and 3-year ROI from 1,481% to 1,232%?</p>
+              <p>The changes may be legitimate refinements, but judges need the assumption bridge.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Changing numbers are acceptable only when the model is controlled and explainable.</div>
+                <div class="cue strong"><b>Strong answer</b>Identifies the new recurring-cost components, one-time setup adjustment, and revised ROI formula.</div>
+                <div class="cue flag"><b>Red flags</b>Different slides use different cost bases without reconciliation.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/girls-s23.png"><img src="finals_judge_prep_assets/slides/girls-s23.png" alt="Girls Power slide 23"></a>
+              <div class="slide-caption">Finals slide 23 - competitive landscape and audit trail.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">What proves same-day regulatory sync and 7-year immutable audit retention in the POC?</p>
+              <p>This slide makes strong differentiation claims. Ask which are implemented, simulated, or planned.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Regulatory freshness and audit retention are hard enterprise capabilities.</div>
+                <div class="cue strong"><b>Strong answer</b>Separates current demo from production plan, names regulatory sources, sync owner, retention control, and audit-store design.</div>
+                <div class="cue flag"><b>Red flags</b>Claims are based only on UI labels or generic architecture.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/girls-s24.png"><img src="finals_judge_prep_assets/slides/girls-s24.png" alt="Girls Power slide 24"></a>
+              <div class="slide-caption">Finals slide 24 - cybersecurity and governance.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">When you say private cloud and data never leaves Jabil perimeter, what is the exact model/runtime location and what data reaches it?</p>
+              <p>This is the most important data-boundary question for their governance slide.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Trade documents can contain financial, supplier, and customs-sensitive information.</div>
+                <div class="cue strong"><b>Strong answer</b>Defines VPC/tenant, model provider, fields sent, fields redacted, encryption, retention/no-training settings, and approval gates.</div>
+                <div class="cue flag"><b>Red flags</b>"Private cloud" is used as a label without deployment specifics.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/girls-s25.png"><img src="finals_judge_prep_assets/slides/girls-s25.png" alt="Girls Power slide 25"></a>
+              <div class="slide-caption">Finals slide 25 - trade-offs and residual risk.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Execution Plan &amp; Feasibility</div>
+              <p class="ask">Which cases are always excluded from AI-assisted approval, even if confidence is high?</p>
+              <p>The slide already names sanctions, legal disputes, missing supplier data, and ambiguous categories. Push for workflow rules.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Human oversight must be enforceable through routing, not just stated as principle.</div>
+                <div class="cue strong"><b>Strong answer</b>Lists forced-manual categories, low-confidence thresholds, escalation owner, and audit behavior for overrides.</div>
+                <div class="cue flag"><b>Red flags</b>High confidence alone can approve high-risk customs cases.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <details>
+          <summary>Backup Questions, Day 1 Consistency, And External Notes</summary>
+          <div class="details-body grid-2">
+            <div>
+              <h4>Backup questions</h4>
+              <ul>
+                <li>Demo: does the YouTube video show live computation or a front-end walkthrough?</li>
+                <li>Cost: why do the cost composition percentages not read as a single clean 100% basis?</li>
+                <li>Regulatory source: who owns the official HTS/tariff/FTA source list and update cadence?</li>
+                <li>Adoption: what happens if analysts distrust the tool and duplicate the old manual workflow?</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Day 1 consistency</h4>
+              <p>Consistent use case, ROI formula, governance theme, and limitations. The investment and 3-year ROI changed from Day 1 to Finals; ask for the assumption bridge rather than treating it as an error.</p>
+              <h4>External-material note</h4>
+              <p>The YouTube link resolves to an unlisted 65.6-second video titled "AITradeX" with no description. The first frame shows a local dashboard/recommendation detail screen. Playback could not be advanced in this environment, so live demo verification remains important.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="team" id="nexa">
+      <div class="team-head">
+        <div>
+          <h2>NEXA</h2>
+          <p class="note">Use Case 2 - AI-assisted tariff automation. Most detailed cost model, rollout, governance, and public code footprint among reviewed finalists.</p>
+          <div class="tag-row">
+            <span class="tag green">Strong detail</span>
+            <span class="tag">Repo evidence</span>
+            <span class="tag amber">Mocks vs live needs clarity</span>
+            <span class="tag amber">Cost model needs reconciliation</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-body">
+        <h3>Must-Ask Questions</h3>
+        <div class="question-list">
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/nexa-s06.png"><img src="finals_judge_prep_assets/slides/nexa-s06.png" alt="NEXA slide 6"></a>
+              <div class="slide-caption">Finals slide 6 - demo video and GitHub link.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Execution Plan &amp; Feasibility</div>
+              <p class="ask">From the repo/demo, which integrations are live today and which are mocked: SAP, e2open, regulatory feed, AI classifier, audit log, and SAP write-back?</p>
+              <p>The public repo is useful evidence, but it defaults SAP and e2open to mock mode.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Prototype maturity depends on working data flow, not only UI and architecture.</div>
+                <div class="cue strong"><b>Strong answer</b>Separates front end, backend, Supabase/database, local model/API use, mock connectors, and real API readiness.</div>
+                <div class="cue flag"><b>Red flags</b>Claims live enterprise integration when the code path falls back to sample data.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/nexa-s20.png"><img src="finals_judge_prep_assets/slides/nexa-s20.png" alt="NEXA slide 20"></a>
+              <div class="slide-caption">Finals slide 20 - TCO and savings breakdown.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Quantify Potential Value</div>
+              <p class="ask">Please reconcile RM 83K monthly savings, RM 18K operating cost, RM 64K net monthly savings, and the detailed cost lines on this slide into one formula.</p>
+              <p>This is the most important value-model question because the slide is detailed but visually dense.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Stakeholders need one defensible model, not several headline numbers.</div>
+                <div class="cue strong"><b>Strong answer</b>Shows exact monthly formula, assumptions, rounding, one-time versus recurring costs, and risk-weighting probabilities.</div>
+                <div class="cue flag"><b>Red flags</b>Penalty avoidance and error reduction are counted as guaranteed monthly cash savings.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/nexa-s15.png"><img src="finals_judge_prep_assets/slides/nexa-s15.png" alt="NEXA slide 15"></a>
+              <div class="slide-caption">Finals slide 15 - AI-human workflow and confidence thresholds.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">Why did the scan-approve threshold move from Day 1's &gt;90% to Finals &gt;95%, and which categories are never bulk-approved?</p>
+              <p>The threshold change could be a governance improvement. Ask them to defend the policy.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Confidence thresholds are risk policy, not just UI labels.</div>
+                <div class="cue strong"><b>Strong answer</b>Explains threshold calibration, excluded categories, new-category full manual review, random audits, and override monitoring.</div>
+                <div class="cue flag"><b>Red flags</b>Bulk approval can apply to sanctions, legal disputes, new categories, or low-data product families.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/nexa-s23.png"><img src="finals_judge_prep_assets/slides/nexa-s23.png" alt="NEXA slide 23"></a>
+              <div class="slide-caption">Finals slide 23 - cybersecurity threats and data risks.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">Walk through exactly how supplier-PDF prompt injection is blocked before OCR text reaches the model.</p>
+              <p>The slide names the attack. Ask for the pipeline, not just the mitigation label.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Hidden text in documents can steer classification or approval behavior.</div>
+                <div class="cue strong"><b>Strong answer</b>Describes OCR sanitization, allow-listed fields, prompt templates, length caps, suspicious text detection, tool isolation, and human escalation.</div>
+                <div class="cue flag"><b>Red flags</b>"The prompt tells AI to ignore malicious instructions" is the primary control.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/nexa-s25.png"><img src="finals_judge_prep_assets/slides/nexa-s25.png" alt="NEXA slide 25"></a>
+              <div class="slide-caption">Finals slide 25 - phased implementation and scaling strategy.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Execution Plan &amp; Feasibility</div>
+              <p class="ask">What are the measurable exit criteria after the offline historical-data test and the 60-day parallel run?</p>
+              <p>The roadmap is strong. Turn it into acceptance criteria.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Executives need a safe go/no-go path for live deployment.</div>
+                <div class="cue strong"><b>Strong answer</b>Defines category accuracy, false classifications, override rate, audit completeness, cost per case, user adoption, and incident thresholds.</div>
+                <div class="cue flag"><b>Red flags</b>Progression is time-based only, not evidence-based.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <details>
+          <summary>Backup Questions, Day 1 Consistency, And External Notes</summary>
+          <div class="details-body grid-2">
+            <div>
+              <h4>Backup questions</h4>
+              <ul>
+                <li>Privacy: which fields are stripped before Azure OpenAI, and how do you prove accuracy remains acceptable?</li>
+                <li>Audit: what prevents a privileged database user from editing or deleting audit evidence?</li>
+                <li>Cost: what quotas and circuit breakers stop multi-module fan-out from creating runaway model/API cost?</li>
+                <li>Security: what changes before CORS, local demo auth, and hardcoded roles are production-ready?</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Day 1 consistency</h4>
+              <p>Consistent use case, architecture, governance, and rollout story. Finals expands cost, NPV, and roadmap detail. The confidence-routing policy changed from Day 1 &gt;90% scan-approve to Finals &gt;95%, with another slide discussing 95% to 90% stepped thresholds; ask for one policy.</p>
+              <h4>External-material note</h4>
+              <p>The GitHub repo is public and contains frontend pages, a Python backend, database schema, tests, and sample data. Repo review found default mock SAP/e2open connectors, fallback-to-mock behavior, hardcoded demo analyst identities, local-demo CORS including file origin, and an empty <code>.env.example</code>.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="team" id="uo">
+      <div class="team-head">
+        <div>
+          <h2>UO Double U Pro Max</h2>
+          <p class="note">Use Case 2 - tariff calculation automation. Strong process framing and cost/prototype sections, but several claims need translation into enterprise controls.</p>
+          <div class="tag-row">
+            <span class="tag">Lean/process framing</span>
+            <span class="tag">Many demo slides</span>
+            <span class="tag red">Day 1 value model changed materially</span>
+            <span class="tag amber">Security claims need specificity</span>
+          </div>
+        </div>
+      </div>
+      <div class="team-body">
+        <h3>Must-Ask Questions</h3>
+        <div class="question-list">
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/uo-s27.png"><img src="finals_judge_prep_assets/slides/uo-s27.png" alt="UO Double U Pro Max slide 27"></a>
+              <div class="slide-caption">Finals slide 27 - project investment and hard benefits.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Quantify Potential Value</div>
+              <p class="ask">Bridge the Day 1 and Finals value models: what changed from RM341,100 investment and RM444,000 annual savings to RM636,900 and RM1,972,350?</p>
+              <p>This is the single highest-impact question for this team.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>A materially changed business case must be explainable under stakeholder scrutiny.</div>
+                <div class="cue strong"><b>Strong answer</b>Shows changed scope, cost categories, annual volume, risk assumptions, benefit categories, and payback formula.</div>
+                <div class="cue flag"><b>Red flags</b>The team cannot reproduce either model or explain the higher savings.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/uo-s28.png"><img src="finals_judge_prep_assets/slides/uo-s28.png" alt="UO Double U Pro Max slide 28"></a>
+              <div class="slide-caption">Finals slide 28 - project cost.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Stakeholder Convincing Power</div>
+              <p class="ask">Which costs are one-time, which are recurring, and who owns maintenance after the pilot?</p>
+              <p>The cost spreadsheet is detailed but hard to parse at presentation speed.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>A good stakeholder ask needs operating ownership, not just investment lines.</div>
+                <div class="cue strong"><b>Strong answer</b>Separates build, cloud, data, AI/API, security, training, maintenance, and support ownership.</div>
+                <div class="cue flag"><b>Red flags</b>Maintenance is a lump sum with no owner, SLA, monitoring, or retraining budget.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/uo-s10.png"><img src="finals_judge_prep_assets/slides/uo-s10.png" alt="UO Double U Pro Max slide 10"></a>
+              <div class="slide-caption">Finals slide 10 - parallel execution of agentic AI.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">What prevents the FTA and COO agents from making conflicting recommendations or multiplying cost through retries?</p>
+              <p>Multi-agent designs can be powerful, but the judge should ask for orchestration and failure controls.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Parallel agents create coordination, cost, and accountability risks.</div>
+                <div class="cue strong"><b>Strong answer</b>Defines tool boundaries, deterministic final calculation, conflict resolver, per-case budget, retry cap, and human escalation.</div>
+                <div class="cue flag"><b>Red flags</b>Agents can independently decide duties or trigger write-back without a controlling workflow.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/uo-s19.png"><img src="finals_judge_prep_assets/slides/uo-s19.png" alt="UO Double U Pro Max slide 19"></a>
+              <div class="slide-caption">Finals slide 19 - security framework.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">AI Partnership &amp; Governance Awareness</div>
+              <p class="ask">What exact threat does blockchain solve here that append-only audit logging, RBAC, and database controls would not?</p>
+              <p>The blockchain claim is a useful place to test architectural maturity.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Security architecture should solve a specific threat, not add complexity for presentation value.</div>
+                <div class="cue strong"><b>Strong answer</b>Compares threat model, participants, keys, immutability, ERP reconciliation, and simpler alternatives.</div>
+                <div class="cue flag"><b>Red flags</b>"Blockchain means secure" without key management, trust model, or source-of-truth reconciliation.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="question">
+            <div class="question-media">
+              <a href="finals_judge_prep_assets/slides/uo-s31.png"><img src="finals_judge_prep_assets/slides/uo-s31.png" alt="UO Double U Pro Max slide 31"></a>
+              <div class="slide-caption">Finals slide 31 - PRO MAX strategy.</div>
+            </div>
+            <div class="question-copy">
+              <div class="criteria">Execution Plan &amp; Feasibility</div>
+              <p class="ask">Which phase is the actual POC scope for the next 60 to 90 days, and what is deliberately out of scope?</p>
+              <p>The strategy slide is broad. Ask for a tight first execution slice.</p>
+              <div class="cue-grid">
+                <div class="cue why"><b>Why it matters</b>Stakeholders need a credible starting point, not a broad transformation map.</div>
+                <div class="cue strong"><b>Strong answer</b>Defines one or two product categories, historical-data test, no live write-back, accuracy gates, user group, and excluded features.</div>
+                <div class="cue flag"><b>Red flags</b>The POC tries to deliver full production security, all agents, all regions, and live integration at once.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <details>
+          <summary>Backup Questions, Day 1 Consistency, And External Notes</summary>
+          <div class="details-body grid-2">
+            <div>
+              <h4>Backup questions</h4>
+              <ul>
+                <li>Security: how do biometric login, DMZ, and blockchain integrate with Jabil's existing identity and audit systems?</li>
+                <li>Governance: who approves low-confidence or conflicting FTA/COO recommendations?</li>
+                <li>Demo: which dashboard and AI-agent screens use real calculation logic versus sample data?</li>
+                <li>Timeline: how does the 1-2 month development line relate to the 6-10 month timeline?</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Day 1 consistency</h4>
+              <p>Consistent use case and process framing. The financial model changed materially: Day 1 showed RM341,100 Year 1 investment, RM444,000 annual savings, and about 9.2-month payback; Finals shows RM636,900 investment, RM1,972,350 annual savings, and about 3.9-month payback.</p>
+              <h4>External-material note</h4>
+              <p>No external slide links were found in the Finals deck relationships.</p>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <details class="watch-list">
+      <summary>Source scope</summary>
+      <div class="details-body">
+        <ul class="source-list">
+          <li>Finalist decks in <code>Finals/</code> and matching Day 1 folders for consistency checks.</li>
+          <li>Official case-study PDF, Judges' Handbook, and scoring workbook in this workspace.</li>
+          <li>External links embedded in decks: <a href="https://github.com/eavan127/NEXA-AI-Powered-Tariff">NEXA GitHub repo</a>, <a href="https://youtu.be/oiRqyM3-WJo">Girls Power YouTube demo</a>, and <a href="https://canva.link/xleg2pfc11022lc">O(1) Canva link</a>.</li>
+        </ul>
+        <p class="footer-note">Generated for judge preparation. No scores, rankings, or winner recommendation are included. Slide thumbnails are exported from the submitted Finals decks and are intended only to orient Q&amp;A.</p>
+      </div>
+    </details>
+  </main>
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    const teamSelect = document.getElementById('teamSelect');
+    const teamSections = Array.from(document.querySelectorAll('section.team'));
+    const validTeams = new Set(teamSections.map(section => section.id));
+
+    function showTeam(teamId, updateHash = true) {
+      const selected = validTeams.has(teamId) ? teamId : teamSections[0].id;
+      teamSections.forEach(section => {
+        section.hidden = section.id !== selected;
+      });
+      teamSelect.value = selected;
+      if (updateHash) {
+        history.replaceState(null, '', `#${selected}`);
+      }
+      window.scrollTo(0, 0);
+    }
+
+    teamSelect.addEventListener('change', event => showTeam(event.target.value));
+    window.addEventListener('hashchange', () => showTeam(location.hash.slice(1), false));
+    window.addEventListener('load', () => setTimeout(() => window.scrollTo(0, 0), 50));
+    showTeam(location.hash.slice(1), false);
+    setTimeout(() => window.scrollTo(0, 0), 250);
+  </script>
+</body>
+</html>
