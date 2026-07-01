@@ -266,6 +266,12 @@
       min-height: 210px;
       box-shadow: var(--tight-shadow);
     }
+    .question[data-criteria="problem"] { border-color: #bfd4e8; }
+    .question[data-criteria="prioritize"] { border-color: #cbdcbb; }
+    .question[data-criteria="governance"] { border-color: #b9dfdc; }
+    .question[data-criteria="value"] { border-color: #efd28d; }
+    .question[data-criteria="execution"] { border-color: #cbc7ea; }
+    .question[data-criteria="convincing"] { border-color: #ecbdb8; }
     .question-media {
       border-right: 1px solid var(--line);
       background: #eef2f6;
@@ -291,15 +297,35 @@
     }
     .question-copy {
       padding: 14px 15px 13px;
+      background: linear-gradient(180deg, var(--criteria-wash, #fff) 0, #fff 88px);
     }
     .criteria {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
       color: var(--teal);
+      background: #eef7f7;
+      border: 1px solid #b9dfdc;
+      border-radius: 6px;
+      padding: 4px 8px;
       font-size: 12px;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .04em;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
+    .criteria[data-criteria="problem"] { color: #18456f; background: #edf6ff; border-color: #bfd4e8; }
+    .criteria[data-criteria="prioritize"] { color: #42671f; background: #f3f8ec; border-color: #cbdcbb; }
+    .criteria[data-criteria="governance"] { color: #0d625d; background: #eef9f8; border-color: #b9dfdc; }
+    .criteria[data-criteria="value"] { color: #7b4a00; background: #fff7e6; border-color: #efd28d; }
+    .criteria[data-criteria="execution"] { color: #4e438d; background: #f4f2ff; border-color: #cbc7ea; }
+    .criteria[data-criteria="convincing"] { color: #8a3025; background: #fff2f0; border-color: #ecbdb8; }
+    .question[data-criteria="problem"] .question-copy { --criteria-wash: #f4f9ff; }
+    .question[data-criteria="prioritize"] .question-copy { --criteria-wash: #f7fbf1; }
+    .question[data-criteria="governance"] .question-copy { --criteria-wash: #f2fbfa; }
+    .question[data-criteria="value"] .question-copy { --criteria-wash: #fffbf0; }
+    .question[data-criteria="execution"] .question-copy { --criteria-wash: #f8f7ff; }
+    .question[data-criteria="convincing"] .question-copy { --criteria-wash: #fff6f5; }
     .ask {
       font-size: 18px;
       font-weight: 900;
@@ -1048,6 +1074,20 @@
     const teamSelect = document.getElementById('teamSelect');
     const teamSections = Array.from(document.querySelectorAll('section.team'));
     const validTeams = new Set(teamSections.map(section => section.id));
+    const criteriaMap = {
+      'Business Problem Clarity': 'problem',
+      'Ability to Prioritize Work Items': 'prioritize',
+      'AI Partnership & Governance Awareness': 'governance',
+      'Quantify Potential Value': 'value',
+      'Execution Plan & Feasibility': 'execution',
+      'Stakeholder Convincing Power': 'convincing'
+    };
+    document.querySelectorAll('.criteria').forEach(element => {
+      const key = criteriaMap[element.textContent.trim()];
+      if (!key) return;
+      element.dataset.criteria = key;
+      element.closest('.question')?.setAttribute('data-criteria', key);
+    });
     const standoutTeam = document.getElementById('standoutTeam');
     const standoutDifferent = document.getElementById('standoutDifferent');
     const standoutPressure = document.getElementById('standoutPressure');
