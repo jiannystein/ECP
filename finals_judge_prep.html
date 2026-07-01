@@ -140,12 +140,6 @@
       color: var(--muted);
       font-size: 13px;
     }
-    .quick-strip {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
     .compact-card {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -158,31 +152,59 @@
       margin-bottom: 8px;
       font-size: 17px;
     }
-    .rule-row {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 6px;
-    }
-    .rule-chip {
-      background: #f8fafc;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 8px;
-      font-size: 12px;
-      min-height: 56px;
-    }
-    .rule-chip b {
-      display: block;
-      color: var(--blue);
-      font-size: 14px;
-      margin-bottom: 2px;
-    }
     .watch-list {
       margin-top: 0;
       box-shadow: var(--tight-shadow);
     }
     .watch-list summary {
       padding: 11px 13px;
+    }
+    .standout-panel {
+      padding: 0;
+      overflow: hidden;
+      border-color: #c9d7e6;
+      box-shadow: var(--tight-shadow);
+    }
+    .standout-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      background: #f7fafc;
+      border-bottom: 1px solid var(--line);
+    }
+    .standout-head h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .standout-team {
+      color: var(--blue);
+      font-weight: 900;
+    }
+    .standout-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+    }
+    .standout-item {
+      padding: 14px 16px;
+      border-right: 1px solid var(--line);
+      min-height: 132px;
+    }
+    .standout-item:last-child { border-right: 0; }
+    .standout-item b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .standout-item p {
+      margin: 0;
+      color: #344052;
+      font-size: 14px;
     }
     .warning {
       background: var(--soft-amber);
@@ -326,18 +348,20 @@
       font-size: 12px;
     }
     @media (max-width: 1100px) {
-      .rubric-grid, .rule-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .quick-strip { grid-template-columns: 1fr; }
+      .rubric-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .question { grid-template-columns: 1fr; }
       .question-media { border-right: 0; border-bottom: 1px solid var(--line); }
       .cue-grid { grid-template-columns: 1fr; }
+      .standout-grid { grid-template-columns: 1fr; }
+      .standout-item { border-right: 0; border-bottom: 1px solid var(--line); min-height: 0; }
+      .standout-item:last-child { border-bottom: 0; }
     }
     @media (max-width: 760px) {
       main { padding: 16px 14px 40px; }
       header { padding: 14px 16px; }
       .topbar { grid-template-columns: 1fr; gap: 10px; }
       .grid-2, .grid-3, .rubric-grid, .team-head { grid-template-columns: 1fr; }
-      .rule-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .standout-head { align-items: flex-start; flex-direction: column; }
     }
   </style>
 </head>
@@ -362,32 +386,26 @@
   </header>
 
   <main>
-    <div class="quick-strip">
-      <section id="cheat-sheet" class="compact-card">
-        <h2>Rubric Anchor</h2>
-        <div class="rule-row">
-          <div class="rule-chip"><b>10%</b>Problem clarity</div>
-          <div class="rule-chip"><b>15%</b>Prioritization</div>
-          <div class="rule-chip"><b>20%</b>AI governance</div>
-          <div class="rule-chip"><b>15%</b>Value proof</div>
-          <div class="rule-chip"><b>20%</b>POC feasibility</div>
-          <div class="rule-chip"><b>20%</b>Convincing power</div>
+    <section id="team-standout" class="standout-panel" aria-live="polite">
+      <div class="standout-head">
+        <h2>Why This Team Stands Out</h2>
+        <span id="standoutTeam" class="standout-team"></span>
+      </div>
+      <div class="standout-grid">
+        <div class="standout-item">
+          <b>Different from the field</b>
+          <p id="standoutDifferent"></p>
         </div>
-      </section>
-
-      <details id="must-watch" class="watch-list">
-        <summary>Cross-team watch list</summary>
-        <div class="details-body">
-          <ul>
-            <li>Projected ROI versus measured prototype result.</li>
-            <li>Human approval that cannot be bypassed.</li>
-            <li>Audit trail immutability, source versioning, and reviewer identity.</li>
-            <li>Exact data boundary for SAP, e2open, regulatory feeds, and AI models.</li>
-            <li>Owner for tariff sources, model thresholds, incidents, support, and retraining.</li>
-          </ul>
+        <div class="standout-item">
+          <b>Pressure point</b>
+          <p id="standoutPressure"></p>
         </div>
-      </details>
-    </div>
+        <div class="standout-item">
+          <b>Judge move</b>
+          <p id="standoutMove"></p>
+        </div>
+      </div>
+    </section>
 
     <section class="team" id="sleep">
       <div class="team-head">
@@ -1030,6 +1048,42 @@
     const teamSelect = document.getElementById('teamSelect');
     const teamSections = Array.from(document.querySelectorAll('section.team'));
     const validTeams = new Set(teamSections.map(section => section.id));
+    const standoutTeam = document.getElementById('standoutTeam');
+    const standoutDifferent = document.getElementById('standoutDifferent');
+    const standoutPressure = document.getElementById('standoutPressure');
+    const standoutMove = document.getElementById('standoutMove');
+    const standoutNotes = {
+      sleep: {
+        team: 'O(1) Sleep O(n) Gain',
+        different: 'Cleanest governance boundary: deterministic rules calculate, AI explains, and analysts make the decision. More pilot-disciplined than most.',
+        pressure: 'The value story is still mostly target-state. Full production TCO and measured pilot proof are thinner than the governance story.',
+        move: 'Make them separate measured prototype metrics from case-study targets, then state the exact pilot gates that would stop rollout.'
+      },
+      '4real': {
+        team: '4Real',
+        different: 'Strongest visual system story: clear architecture, governance pillars, and prioritization narrative around TRACE.',
+        pressure: 'Evidence is visual-heavy and text-sparse. The biggest risk is polished architecture without enough live module proof or value math.',
+        move: 'Ask them to walk one shipment end-to-end and label each module as functional today, mocked, or future architecture.'
+      },
+      girls: {
+        team: 'Girls Power',
+        different: 'Most transparent ROI formula and unusually explicit limitations. They show the assumptions instead of hiding the math.',
+        pressure: 'The formula is only as strong as the inputs. Same-day regulatory sync, 7-year audit retention, and ROI changes need proof.',
+        move: 'Use the cost/ROI bridge question first, then force a line between demo capability, production claim, and external YouTube evidence.'
+      },
+      nexa: {
+        team: 'NEXA',
+        different: 'Best artifact footprint: detailed cost model, rollout plan, governance framing, and a public repo that can be inspected.',
+        pressure: 'The repo makes mock SAP/e2open paths, fallback data, hardcoded demo identities, and mock-versus-live claims the central risk.',
+        move: 'Start with the repo/demo integration question and make them identify what is live, mocked, simulated, or production-ready.'
+      },
+      uo: {
+        team: 'UO Double U Pro Max',
+        different: 'Strong process and Lean framing with an ambitious multi-agent operating model and many prototype screens.',
+        pressure: 'Largest Day 1 to Finals value-model jump, plus blockchain/biometric/DMZ claims that may add complexity without clear threat fit.',
+        move: 'Force the business-case bridge, then narrow the next 60 to 90 days to a credible POC slice with explicit out-of-scope items.'
+      }
+    };
 
     function showTeam(teamId, updateHash = true) {
       const selected = validTeams.has(teamId) ? teamId : teamSections[0].id;
@@ -1037,6 +1091,11 @@
         section.hidden = section.id !== selected;
       });
       teamSelect.value = selected;
+      const note = standoutNotes[selected];
+      standoutTeam.textContent = note.team;
+      standoutDifferent.textContent = note.different;
+      standoutPressure.textContent = note.pressure;
+      standoutMove.textContent = note.move;
       if (updateHash) {
         history.replaceState(null, '', `#${selected}`);
       }
